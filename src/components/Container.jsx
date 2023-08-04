@@ -1,9 +1,14 @@
-import React from 'react'
+import SearchIngredient from "./SearchIngredient";
 
 function Container() {
-  return (
-    <div>Container</div>
-  )
+
+
+
+    return (
+        <div>
+            <SearchIngredient />
+        </div>
+    )
 }
 
 export default Container
