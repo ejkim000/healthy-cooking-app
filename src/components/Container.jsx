@@ -2,8 +2,6 @@ import SearchIngredient from "./SearchIngredient";
 
 function Container() {
 
-
-
     return (
         <div>
             <SearchIngredient />
