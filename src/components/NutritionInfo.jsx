@@ -1,14 +1,15 @@
 
 function NutritionInfo({ foods }) {
 
-    console.log(foods)
     return (
-        <div>
+        <ul>
            {foods !== undefined ? (foods.map((food) => {
-            return <h3>{food.description}</h3>
+            // console.log(foods);
+            console.log(food.foodMeasures, food.foodNutrients);
+            return <li key={food.fdcId}>{food.description}</li>
            })) : null
         }     
-        </div>
+        </ul>
     )
 }
 
