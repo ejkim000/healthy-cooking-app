@@ -1,0 +1,14 @@
+.food-name {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.food-nutrition {
+    margin: 1rem;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 0.5rem;
+    background-color: aquamarine;
+    font-weight: 400;
+}
