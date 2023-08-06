@@ -3,7 +3,7 @@ import { useState } from "react";
 function NutritionInfo({ foods }) {
 
     const [selectedFood, setSelectedFood] = useState({});
-    const [nutritionStyle, setNutritionStyle] = useState('food-nutrition');
+    const [nutritionStyle, setNutritionStyle] = useState('hidden');
 
     const handleToggle = () => {
 
@@ -14,7 +14,7 @@ function NutritionInfo({ foods }) {
     }
 
     const handleChange = ({ target }) => {
-
+        
     }
 
     return (
@@ -39,7 +39,7 @@ function NutritionInfo({ foods }) {
                 </div>
                 <div>
                     Input weight <input type="text" onChange={handleChange} name='1234-weight' />
-                    <button onClick={handleSelect}> Add to Receipe</button>
+                    <button onClick={handleSelect}> Add to Ingredient</button>
                 </div>
             </li>
 

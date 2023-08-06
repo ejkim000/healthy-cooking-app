@@ -2,7 +2,7 @@ import React from 'react'
 
 function Header() {
   return (
-    <h1>Healthy Cooking YumYum</h1>
+    <h1>Waht do you eat today?</h1>
   )
 }
 

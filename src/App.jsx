@@ -7,11 +7,11 @@ import './components/styles/utility.css';
 function App() {
 
   return (
-    <>
+    <div className="app">
       <Header />
       <Container />
       <Footer />
-    </>
+    </div>
   )
 }
 
