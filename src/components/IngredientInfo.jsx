@@ -2,7 +2,10 @@ import React from 'react'
 
 function IngredientInfo() {
   return (
-    <div>IngredientInfo</div>
+    <div>
+      Selected Ingredients Info
+
+    </div>
   )
 }
 

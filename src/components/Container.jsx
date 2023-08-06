@@ -1,3 +1,4 @@
+import IngredientInfo from "./IngredientInfo";
 import SearchIngredient from "./SearchIngredient";
 
 function Container() {
@@ -5,6 +6,7 @@ function Container() {
     return (
         <div>
             <SearchIngredient />
+            <IngredientInfo />
         </div>
     )
 }

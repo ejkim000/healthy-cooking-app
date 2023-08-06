@@ -2,38 +2,47 @@ import { useState } from "react";
 
 function NutritionInfo({ foods }) {
 
-    const [food, setFood] = useState({});
+    const [selectedFood, setSelectedFood] = useState({});
+    const [nutritionStyle, setNutritionStyle] = useState('food-nutrition');
 
     const handleToggle = () => {
-        
+
     }
 
     const handleSelect = () => {
 
     }
 
+    const handleChange = ({ target }) => {
+
+    }
+
     return (
         <ol>
-            <li key='1234' onClick={handleToggle} className='food-name'>
+            <li key='1234' className='food-name'>
                 Food name
                 <button onClick={handleToggle} className="secondary-button">See Nutrition Info</button>
-                <button onClick={handleSelect} className="secondary-button">Select</button>
+
+                <div className={nutritionStyle}>
+                    <div>Nutrition Name</div>
+                    <div>Fact</div>
+                    <div>Nutrition Name</div>
+                    <div>Fact</div>
+                    <div>Nutrition Name</div>
+                    <div>Fact</div>
+                    <div>Nutrition Name</div>
+                    <div>Fact</div>
+                    <div>Nutrition Name</div>
+                    <div>Fact</div>
+                    <div>Nutrition Name</div>
+                    <div>Fact</div>
+                </div>
+                <div>
+                    Input weight <input type="text" onChange={handleChange} name='1234-weight' />
+                    <button onClick={handleSelect}> Add to Receipe</button>
+                </div>
             </li>
 
-            <div id='nutrition-1234' className="food-nutrition">
-                <div>Nutrition Name</div>
-                <div>Fact</div>
-                <div>Nutrition Name</div>
-                <div>Fact</div>
-                <div>Nutrition Name</div>
-                <div>Fact</div>
-                <div>Nutrition Name</div>
-                <div>Fact</div>
-                <div>Nutrition Name</div>
-                <div>Fact</div>
-                <div>Nutrition Name</div>
-                <div>Fact</div>
-            </div>
 
 
             {foods !== undefined ? (foods.map((food) => {
