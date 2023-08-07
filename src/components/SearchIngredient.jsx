@@ -28,7 +28,7 @@ function SearchIngredient() {
         }
     };
 
-    const handleBrand = ({ target }) => {
+    const handleCheckbox = ({ target }) => {
         //console.log(target.value);
         if (target.value === 'on') {
             setDataType('Branded');
@@ -49,8 +49,8 @@ function SearchIngredient() {
         <div>
             <form>
                 <input type="text" name='ingredient' placeholder='ingredient' onChange={handleChange} />
-                <input type="checkbox" name="brand" onClick={handleBrand} />
                 <button onClick={handleSearch} className='primary-button'>Search</button>
+                <br />Search in Brand <input type="checkbox" name="brand" onClick={handleCheckbox} />
             </form>
 
             <NutritionInfo foods={foods} />
@@ -58,4 +58,4 @@ function SearchIngredient() {
     )
 }
 
-export default SearchIngredient
+export default SearchIngredient;
