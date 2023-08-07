@@ -17,11 +17,11 @@ function SearchIngredient() {
     const url4 =`https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=Foundation&pageSize=10&api_key=${APIKEY}`;
 
     const nutritionApiCall = async () => {
-        // const res = await fetch(url2);
-        // const data = await res.json();
-        // // console.log(data);
+        const res = await fetch(url2);
+        const data = await res.json();
+        console.log(data);
 
-        // setFoods(data.foods);
+        setFoods(data.foods);
     }
 
     const handleChange = ({ target }) => {
@@ -49,7 +49,7 @@ function SearchIngredient() {
                 <button onClick={handleSearch} className='primary-button'>Search</button>
             </form>
 
-            <NutritionInfo foods={foods} />
+            {/* <NutritionInfo foods={foods} /> */}
         </div>
     )
 }
