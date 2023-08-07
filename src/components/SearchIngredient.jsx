@@ -6,18 +6,15 @@ function SearchIngredient() {
 
     const [foods, setFoods] = useState([]);
     const [ingredient, setIngredient] = useState('');
+    const [dataType, setDataType] = useState('Survey%20%28FNDDS%29');
     const APIKEY = import.meta.env.VITE_API_KEY;
 
-    const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=SR%20Legacy&api_key=${APIKEY}`;
+    const url_SR_Legacy = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=SR%20Legacy&api_key=${APIKEY}`;
 
-    const url2 =`https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=Branded&pageSize=100&pageNumber=1&api_key=${APIKEY}`;
-
-    const url3 =`https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=Survey%20%28FNDDS%29&pageSize=10&api_key=${APIKEY}`;
-
-    const url4 =`https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=Foundation&pageSize=10&api_key=${APIKEY}`;
+    const url =`https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=${dataType}&pageSize=100&pageNumber=1&api_key=${APIKEY}`;
 
     const nutritionApiCall = async () => {
-        const res = await fetch(url2);
+        const res = await fetch(url);
         const data = await res.json();
         console.log(data);
 
@@ -31,6 +28,13 @@ function SearchIngredient() {
         }
     };
 
+    const handleBrand = ({ target }) => {
+        //console.log(target.value);
+        if (target.value === 'on') {
+            setDataType('Branded');
+        }
+    };
+
     const handleSearch = (e) => {
         e.preventDefault();
         // console.log(ingredient);
@@ -39,17 +43,17 @@ function SearchIngredient() {
         } else {
             console.log('input ingredient name')
         }
-
     };
 
     return (
         <div>
             <form>
-                <input type="text" name='ingredient' placeholder='ingredient' onChange={handleChange} /> Add Brand Search option here
+                <input type="text" name='ingredient' placeholder='ingredient' onChange={handleChange} />
+                <input type="checkbox" name="brand" onClick={handleBrand} />
                 <button onClick={handleSearch} className='primary-button'>Search</button>
             </form>
 
-            {/* <NutritionInfo foods={foods} /> */}
+            <NutritionInfo foods={foods} />
         </div>
     )
 }

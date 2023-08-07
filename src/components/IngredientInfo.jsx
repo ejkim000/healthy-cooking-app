@@ -5,7 +5,6 @@ function IngredientInfo() {
 
   }
 
-
   return (
     <div>
       <h3>Selected Ingredients</h3>
