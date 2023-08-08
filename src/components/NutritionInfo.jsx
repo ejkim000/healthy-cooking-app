@@ -12,6 +12,7 @@ function NutritionInfo({ foods }) {
             ...toggle,
             [foodId]: !toggle[foodId]
         });
+        console.log(toggle);
     }
 
     const handleChange = ({ target }, foodId) => {
@@ -21,6 +22,8 @@ function NutritionInfo({ foods }) {
             ...weight,
             [foodId]: val
         });
+
+        console.log(weight);
     }
 
     const handleSelect = (foodId, { target }) => {
@@ -28,6 +31,8 @@ function NutritionInfo({ foods }) {
             ...unit,
             [foodId]: target.value
         });
+
+        console.log(unit);
     }
 
     const handleAdd = () => {
@@ -42,12 +47,12 @@ function NutritionInfo({ foods }) {
     return (
         <ol>
             {foods !== undefined ? (foods.map((food) => {
-                console.log(food);
+                //console.log(food);
                 
                 return (
                     <li key={food.fdcId}>
                         {food.description} {food.dataType === 'Branded' && (` Brand: ${food.brandName} - ${food.brandOwner}`)}
-                        <button onClick={(e) => handleToggle(food.fdcId,e)} className="secondary-button">{food.toggle? "Hide" : "See"} Nutrition Info</button>
+                        <button onClick={(e) => handleToggle(food.fdcId,e)} className="secondary-button">{toggle[food.fdcId] ? "Hide" : "See"} Nutrition Info</button>
                         <br />
                         <input type="text" pattern="[0-9]*" name="weight" onChange={(e) => handleChange(food.fdcId, e)} /> 
                         <select name="unit" onSelect={(e) => handleSelect(food.fdcId, e)}>
@@ -58,7 +63,7 @@ function NutritionInfo({ foods }) {
                         <br />
                         {food.foodNutrients.map((item) => {
                             return (
-                                <div key={item.nutrientId} className={food.toggle? "food-nutrition" : "food-nutrition hidden"}>
+                                <div key={item.nutrientId} className={toggle[food.fdcId] ? "food-nutrition" : "food-nutrition hidden"}>
                                     <div>{item.nutrientName}</div>
                                     <div>{item.value}</div>
                                 </div>
