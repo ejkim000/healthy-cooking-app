@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function NutritionInfo({ foods }) {
 
     const [selectedFood, setSelectedFood] = useState({});
-    const [toggle, setToggle] = useState(false);
-    const [weight, setWeight] = useState(0);
-    const [unit, setUnit] = useState('oz');
+    const [toggle, setToggle] = useState({});
+    const [weight, setWeight] = useState({});
+    const [unit, setUnit] = useState({});
 
-    const handleToggle = () => {
-        setToggle(!toggle);
+    const handleToggle = (foodId) => {
+        setToggle({
+            ...toggle,
+            [foodId]: !toggle[foodId]
+        });
     }
 
-    const handleChange = ({ target }) => {
-        const val = target.value*1;
-        isNaN(val) && setWeight(val);
+    const handleChange = ({ target }, foodId) => {
+        const val = target.value * 1;
+
+        isNaN(val) && setWeight({
+            ...weight,
+            [foodId]: val
+        });
     }
 
-    const handleSelect = ({ target }) => {
-        setUnit(target.value);
+    const handleSelect = (foodId, { target }) => {
+        setUnit({
+            ...unit,
+            [foodId]: target.value
+        });
     }
 
     const handleAdd = () => {
@@ -25,18 +35,22 @@ function NutritionInfo({ foods }) {
     }
 
 
+    useEffect(() => {
+        console.log(toggle)
+    }, []);
+
     return (
         <ol>
             {foods !== undefined ? (foods.map((food) => {
                 console.log(food);
-                // console.log(food.foodMeasures, food.foodNutrients);
+                
                 return (
                     <li key={food.fdcId}>
                         {food.description} {food.dataType === 'Branded' && (` Brand: ${food.brandName} - ${food.brandOwner}`)}
-                        <button onClick={handleToggle} className="secondary-button">{toggle? "Hide" : "See"} Nutrition Info</button>
+                        <button onClick={(e) => handleToggle(food.fdcId,e)} className="secondary-button">{food.toggle? "Hide" : "See"} Nutrition Info</button>
                         <br />
-                        <input type="text" name="weight" onChange={handleChange} /> 
-                        <select name="unit" onSelect={handleSelect}>
+                        <input type="text" pattern="[0-9]*" name="weight" onChange={(e) => handleChange(food.fdcId, e)} /> 
+                        <select name="unit" onSelect={(e) => handleSelect(food.fdcId, e)}>
                             <option value="oz">oz</option>
                             <option value="g">g</option>
                         </select>
@@ -44,7 +58,7 @@ function NutritionInfo({ foods }) {
                         <br />
                         {food.foodNutrients.map((item) => {
                             return (
-                                <div key={item.nutrientId} className={toggle? "food-nutrition" : "food-nutrition hidden"}>
+                                <div key={item.nutrientId} className={food.toggle? "food-nutrition" : "food-nutrition hidden"}>
                                     <div>{item.nutrientName}</div>
                                     <div>{item.value}</div>
                                 </div>
