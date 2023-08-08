@@ -15,10 +15,10 @@ function NutritionInfo({ foods }) {
         console.log(toggle);
     }
 
-    const handleChange = ({ target }, foodId) => {
-        const val = target.value * 1;
+    const handleChange = (foodId, val) => {
+        val = val * 1;
 
-        isNaN(val) && setWeight({
+        !isNaN(val) && setWeight({
             ...weight,
             [foodId]: val
         });
@@ -26,10 +26,10 @@ function NutritionInfo({ foods }) {
         console.log(weight);
     }
 
-    const handleSelect = (foodId, { target }) => {
+    const handleSelect = (foodId, val) => {
         setUnit({
             ...unit,
-            [foodId]: target.value
+            [foodId]: val
         });
 
         console.log(unit);
@@ -54,8 +54,8 @@ function NutritionInfo({ foods }) {
                         {food.description} {food.dataType === 'Branded' && (` Brand: ${food.brandName} - ${food.brandOwner}`)}
                         <button onClick={(e) => handleToggle(food.fdcId,e)} className="secondary-button">{toggle[food.fdcId] ? "Hide" : "See"} Nutrition Info</button>
                         <br />
-                        <input type="text" pattern="[0-9]*" name="weight" onChange={(e) => handleChange(food.fdcId, e)} /> 
-                        <select name="unit" onSelect={(e) => handleSelect(food.fdcId, e)}>
+                        <input type="text" onChange={(e) => handleChange(food.fdcId, e.target.value)} /> 
+                        <select value={unit[food.fdcId]} onChange={(e) => handleSelect(food.fdcId, e.target.value)}>
                             <option value="oz">oz</option>
                             <option value="g">g</option>
                         </select>
