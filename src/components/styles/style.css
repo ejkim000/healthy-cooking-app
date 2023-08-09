@@ -16,3 +16,8 @@
     background-color: aquamarine;
     font-weight: 400;
 }
+
+.result {
+    display: flex;
+    flex-direction: column;
+}

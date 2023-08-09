@@ -8,6 +8,7 @@ function NutritionInfo({ foods }) {
     const [toggle, setToggle] = useState({});
     const [weight, setWeight] = useState({});
     const [unit, setUnit] = useState({});
+    const [resultStyle, setResultStyle] = useState('result');
 
     const handleToggle = (foodId) => {
         setToggle({
@@ -53,6 +54,7 @@ function NutritionInfo({ foods }) {
     const handleAdd = (food) => {
         setSelectedFood(food);
         addWeightunit();
+        setResultStyle('hidden');
     }
 
     useEffect(() => {
@@ -77,11 +79,15 @@ function NutritionInfo({ foods }) {
 
     }, [allFoods]);
 
+    useEffect(() => {
+        setResultStyle('result');
+    }, [foods])
+
     // add reset button later
 
     return (
-        <>
-            <ol>
+        <div>
+            <ol className={resultStyle}>
                 {foods !== undefined ? (foods.map((food) => {
                     //console.log(food);
                     return (
@@ -119,8 +125,8 @@ function NutritionInfo({ foods }) {
                 }
             </ol>
 
-            <IngredientsInfo data={allFoods} />
-        </>
+            <IngredientsInfo data={selectedFood} />
+        </div>
 
     )
 }
