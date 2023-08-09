@@ -81,7 +81,6 @@ function NutritionInfo({ foods }) {
 
     return (
         <>
-            <IngredientsInfo data={allFoods} />
             <ol>
                 {foods !== undefined ? (foods.map((food) => {
                     //console.log(food);
@@ -119,6 +118,8 @@ function NutritionInfo({ foods }) {
                 })) : <li> Cannot find the ingredient you are looking for</li>
                 }
             </ol>
+
+            <IngredientsInfo data={allFoods} />
         </>
 
     )
