@@ -3,7 +3,6 @@ import IngredientsInfo from "./IngredientsInfo";
 
 function NutritionInfo({ foods }) {
 
-    const [allFoods, setAllFoods] = useState([]);
     const [selectedFood, setSelectedFood] = useState({});
     const [toggle, setToggle] = useState({});
     const [weight, setWeight] = useState({});
@@ -56,28 +55,6 @@ function NutritionInfo({ foods }) {
         addWeightunit();
         setResultStyle('hidden');
     }
-
-    useEffect(() => {
-        /* add selected food to allFoods when it's not an empty object */
-        if (Object.keys(selectedFood).length > 0) {
-            /* check selected food is already added or not */
-            if (allFoods.length === 0 || allFoods.some((f) => f.fdcId !== selectedFood.fdcId)) {
-                /* Add selected food to the allFoods */
-                setAllFoods(prev => [
-                    ...prev,
-                    selectedFood
-                ]);
-            }
-        }
-    }, [selectedFood]);
-
-    useEffect(() => {
-        // add allFoods to local storage when it's not empty
-        if (allFoods.length > 0) {
-            localStorage.setItem('allFoods', JSON.stringify(allFoods));
-        }
-
-    }, [allFoods]);
 
     useEffect(() => {
         setResultStyle('result');

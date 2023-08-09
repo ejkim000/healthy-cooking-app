@@ -5,15 +5,10 @@ function IngredientsInfo({ data }) {
   const [selectedFoods, setSelectedFoods] = useState([]);
 
   const handleRemove = (foodId) => {
-
     setSelectedFoods((prev) => prev.filter((food) => food.fdcId !== foodId));
   }
 
   useEffect(() => {
-
-    console.log(data, Object.keys(data).length);
-    console.log('data', selectedFoods);
-
     /* add received data to the selectedFoods and local storage */
     if (Object.keys(data).length > 0) {
 
@@ -21,27 +16,18 @@ function IngredientsInfo({ data }) {
         ...prev,
         data
       ]) : setSelectedFoods([data]);
-
-      localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
     }
-
   }, [data]);
 
   useEffect(() => {
     /* save local storage data to selectedFoods initially */
     const savedData = JSON.parse(localStorage.getItem('allFoods'));
-
     setSelectedFoods(savedData);
-
-    console.log('init',selectedFoods);
   }, []);
 
-
   useEffect(() => {
-    console.log('selectedfood',selectedFoods);
+    localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
   }, [selectedFoods]);
-
-
 
   const loaded = () => {
     return (<div>
@@ -76,9 +62,7 @@ function IngredientsInfo({ data }) {
     )
   }
 
-  const loading = () => {
-    return null;
-  }
+  const loading = () => null;
 
   return (selectedFoods && selectedFoods.length > 0) ? loaded() : loading();
 }
