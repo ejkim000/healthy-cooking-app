@@ -13,76 +13,68 @@ function NutritionInfo({ foods }) {
             ...toggle,
             [foodId]: !toggle[foodId]
         });
-        // console.log(toggle);
     }
 
     const handleChange = (foodId, val) => {
+        /* check val is number, then save */
         val = val * 1;
 
-        !isNaN(val) && setWeight({
-            ...weight,
-            [foodId]: val
+        !isNaN(val) && setWeight(prev => {
+            return {
+                ...prev,
+                [foodId]: val
+            }
         });
-        // console.log(weight);
     }
 
     const handleSelect = (foodId, val) => {
-        setUnit({
-            ...unit,
-            [foodId]: val
+        /* check selected unit is not empty, then save*/
+        (val !== '') && setUnit(prev => {
+            return {
+                ...prev,
+                [foodId]: val
+            }
         });
-        // console.log(unit);
     }
 
-    const addToLocalStorage = () => {
-        // /* get localstorage items */
-        // const savedFoods = JSON.parse(localStorage.getItem('allFoods'));
-        // /* add selectedFood to saved foods */
-        // console.log('saved', typeof savedFoods, savedFoods);
-
-        // let addFlag = true;
-        // if (savedFoods != null) {
-        //     savedFoods.some(f => f.fdcId === selectedFood.fdcId) && (addFlag = false)
-        // }
-
-                let addFlag = true;
-        if (allFoods != null) {
-            allFoods.some(f => f.fdcId === selectedFood.fdcId) && (addFlag = false)
-        }
-
-        if (addFlag) 
-        {
-            setAllFoods([
-                ...allFoods,
-                selectedFood
-            ]);
-
-
-            /* set all foods to localstorage */
-            localStorage.setItem('allFoods', JSON.stringify(allFoods));
-        }
-
-        console.log('all', allFoods);
-
+    const addWeightunit = () => {
+        /* Add weight and unit to the selectedFood */
+        setSelectedFood(prev => {
+            return {
+                ...prev,
+                weight: weight[prev.fdcId],
+                unit: unit[prev.fdcId]
+            }
+        });
     }
 
     /* Add selected food in the recipe */
     const handleAdd = (food) => {
         setSelectedFood(food);
-        addToLocalStorage();
+        addWeightunit();
     }
 
     useEffect(() => {
+        /* add selected food to allFoods when it's not an empty object */
+        if (Object.keys(selectedFood).length > 0) {
+            /* check selected food is already added or not */
+            if (allFoods.length === 0 || allFoods.some((f) => f.fdcId !== selectedFood.fdcId)) {
+                /* Add selected food to the allFoods */
+                setAllFoods(prev => [
+                    ...prev,
+                    selectedFood
+                ]);
+            }
+        }
+    }, [selectedFood]);
 
-        setSelectedFood(selectedFood);
+    useEffect(() => {
+        // add allFoods to local storage when it's not empty
+        if (allFoods.length > 0) {
+            localStorage.setItem('allFoods', JSON.stringify(allFoods));
+        }
         
-        setAllFoods(allFoods);
-
-        localStorage.setItem('allFoods', JSON.stringify(allFoods));
-
-        console.log(selectedFood, allFoods);
-
-    }, [selectedFood, allFoods]);
+    }, [allFoods]);
 
     return (
         <ol>
@@ -101,6 +93,7 @@ function NutritionInfo({ foods }) {
                         <input type="text" onChange={(e) => handleChange(food.fdcId, e.target.value)} />
 
                         <select value={unit[food.fdcId]} onChange={(e) => handleSelect(food.fdcId, e.target.value)}>
+                            <option value="">Select weight unit</option>
                             <option value="oz">oz</option>
                             <option value="g">g</option>
                         </select>
@@ -118,7 +111,7 @@ function NutritionInfo({ foods }) {
                         })}
                     </li>
                 )
-            })) : null
+            })) : <li> Cannot find the ingredient you are looking for</li>
             }
         </ol>
     )
