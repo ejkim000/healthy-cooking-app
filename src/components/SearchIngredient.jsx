@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import NutritionInfo from './NutritionInfo';
-import IngredientsInfo from "./IngredientsInfo";
+
 
 function SearchIngredient() {
 
@@ -47,13 +47,11 @@ function SearchIngredient() {
 
     return (
         <div>
-            <IngredientsInfo />
             <form>
                 <input type="text" name='ingredient' placeholder='ingredient' onChange={handleChange} />
                 <button onClick={handleSearch} className='primary-button'>Search</button>
                 <br />Search in Brand <input type="checkbox" name="brand" onClick={handleCheckbox} />
             </form>
-
             <NutritionInfo foods={foods} />
         </div>
     )
