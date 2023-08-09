@@ -1,6 +1,6 @@
 import React from 'react';
 
-function IngredientInfo() {
+function IngredientsInfo() {
   const handleRemove = () => {
 
   }
@@ -55,4 +55,4 @@ function IngredientInfo() {
   )
 }
 
-export default IngredientInfo
+export default IngredientsInfo

@@ -1,6 +1,6 @@
-import NutritionInfo from './NutritionInfo';
 import { useState } from 'react';
-
+import NutritionInfo from './NutritionInfo';
+import IngredientsInfo from "./IngredientsInfo";
 
 function SearchIngredient() {
 
@@ -47,6 +47,7 @@ function SearchIngredient() {
 
     return (
         <div>
+            <IngredientsInfo />
             <form>
                 <input type="text" name='ingredient' placeholder='ingredient' onChange={handleChange} />
                 <button onClick={handleSearch} className='primary-button'>Search</button>
