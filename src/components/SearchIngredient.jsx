@@ -16,7 +16,7 @@ function SearchIngredient() {
     const nutritionApiCall = async () => {
         const res = await fetch(url);
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
 
         setFoods(data.foods);
     }
