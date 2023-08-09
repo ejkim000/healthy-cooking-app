@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 function IngredientsInfo({ data }) {
 
-  const [selectedFoods, setSelectedFoods] = useState([]);
+  const savedData = JSON.parse(localStorage.getItem('allFoods'));
+  const [selectedFoods, setSelectedFoods] = useState(savedData);
 
   const handleRemove = (foodId) => {
     setSelectedFoods((prev) => prev.filter((food) => food.fdcId !== foodId));
@@ -20,12 +21,6 @@ function IngredientsInfo({ data }) {
   }, [data]);
 
   useEffect(() => {
-    /* save local storage data to selectedFoods initially */
-    const savedData = JSON.parse(localStorage.getItem('allFoods'));
-    setSelectedFoods(savedData);
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
   }, [selectedFoods]);
 
@@ -35,7 +30,7 @@ function IngredientsInfo({ data }) {
         {selectedFoods.map((food) => {
           return (
             <li key={food.fdcId}>
-              {food.description} {food.weight} {food.unit}
+              <b>{food.description}</b> {food.weight} {food.unit}
               <button onClick={() => handleRemove(food.fdcId)}>❌</button>
             </li>
           )
