@@ -87,12 +87,12 @@ function NutritionInfo({ foods }) {
 
                             <button onClick={() => handleAdd(food)} className="secondary-button">Add to Recipe</button>
                             <br />
-
-                            {food.foodNutrients.map((item) => {
+                            {/* Show only exisiting nutritions */}
+                            {food.foodNutrients.filter(item => item.value > 0).map((i) => {
                                 return (
-                                    <div key={item.nutrientId} className={toggle[food.fdcId] ? "food-nutrition" : "food-nutrition hidden"}>
-                                        <div>{item.nutrientName}</div>
-                                        <div>{item.value}</div>
+                                    <div key={i.nutrientId} className={toggle[food.fdcId] ? "food-nutrition" : "food-nutrition hidden"}>
+                                        <div>{i.nutrientName}</div>
+                                        <div>{i.value}</div>
                                     </div>
                                 )
                             })}
