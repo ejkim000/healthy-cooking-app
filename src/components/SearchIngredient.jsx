@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NutritionInfo from './NutritionInfo';
 
 
@@ -49,6 +49,10 @@ function SearchIngredient() {
         }
     };
 
+    useEffect(() => {
+        setFoods([]);
+    },[])
+    
     return (
         <div className='container'>
             <div className='form-container'>
