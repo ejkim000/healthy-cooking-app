@@ -2,18 +2,6 @@
   display: none;
 }
 
-h1 {
-    font-size: 2.5rem;
-    line-height: 1;
-    margin-bottom: 0.2rem;
-    text-align: center;
-}
-
-h2 {
-  text-align: center;
-  color: #666;
-}
-
 button {
     border-radius: 6px;
     border: 1px solid transparent;
@@ -25,7 +13,7 @@ button {
 }
 
 button:hover {
-  border-color: #60ff60;
+  border-color: #000;
 }
 button:focus,
 button:focus-visible {
@@ -35,21 +23,27 @@ button:focus-visible {
 
 .primary-button {
     font-size: 1.3rem;
-    background-color: #ff691e;
+    background-color: #10c410;
     color: white;
 }
 
 
 .secondary-button {
     font-size: 1rem;
-    background-color: #8a8a8a;
-    color: white;
+    font-weight: 600;
+    background-color: #14de5e;
+    color: #161616;
+    padding: 0.7rem;
 }
 
 
 input {
   font-size: 1.5rem;
   padding: 0.5rem;
+}
+
+input.number {
+  width: 5rem;
 }
 
 .form-control {
@@ -64,6 +58,15 @@ input {
   justify-content: center;
 }
 
+input[type="select"] {
+  margin: 0;
+  font: inherit;
+  width: 1.5em;
+  height: 1.5em;
+  border: 0.15em solid #8a8a8a;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+}
 
 input[type="checkbox"] {
   /* Add if not using autoprefixer */
@@ -75,13 +78,12 @@ input[type="checkbox"] {
   /* Not removed via appearance */
   margin: 0;
   font: inherit;
-  color: #60ff60;
   width: 1.5em;
   height: 1.5em;
-  border: 0.15em solid #8a8a8a;
+  border: 0.15em solid #000;
   border-radius: 0.15em;
   transform: translateY(-0.075em);
-
+  background-color: white;
   display: grid;
   place-content: center;
 }

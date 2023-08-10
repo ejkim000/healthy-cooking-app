@@ -64,6 +64,7 @@ function NutritionInfo({ foods }) {
 
     return (
         <div>
+            <h3><img src="/src/assets/images/title-bg.png" alt="lemon"/>Search Result</h3>
             <ol className={resultStyle}>
                 {foods !== undefined ? (foods.map((food) => {
                     //console.log(food);
@@ -77,7 +78,7 @@ function NutritionInfo({ foods }) {
                             </button>
                             <br />
 
-                            <input type="text" onChange={(e) => handleChange(food.fdcId, e.target.value)} />
+                            <input type="number" pattern='[0-9]{0,5}' className='number' onChange={(e) => handleChange(food.fdcId, e.target.value)} />
 
                             <select value={unit[food.fdcId]} onChange={(e) => handleSelect(food.fdcId, e.target.value)}>
                                 <option value="">Select weight unit</option>
@@ -91,8 +92,8 @@ function NutritionInfo({ foods }) {
                             {food.foodNutrients.filter(item => item.value > 0).map((i) => {
                                 return (
                                     <div key={i.nutrientId} className={toggle[food.fdcId] ? "food-nutrition" : "food-nutrition hidden"}>
-                                        <div>{i.nutrientName}</div>
-                                        <div>{i.value}</div>
+                                        <div><b>{i.nutrientName}</b></div>
+                                        <div>{i.value} {i.unitName}</div>
                                     </div>
                                 )
                             })}

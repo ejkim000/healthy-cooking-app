@@ -90,7 +90,7 @@ function IngredientsInfo({ data }) {
 
   const loaded = () => {
     return (<div>
-      <h3>Selected Ingredients</h3><ul>
+      <h3><img src="/src/assets/images/title-bg.png" alt="lemon"/>Selected Ingredients</h3><ul>
         {selectedFoods.map((food) => {
           return (
             <li key={food.fdcId}>
@@ -102,7 +102,7 @@ function IngredientsInfo({ data }) {
         )}
       </ul>
       <div>
-        <h3>Total nutrition information</h3>
+        <h3><img src="/src/assets/images/title-bg.png" alt="lemon"/>Total nutrition information</h3>
         {/* Show only exisiting nutritions */}
         {Object.keys(nutritionList).filter(key => nutritionList[key] > 0).map((k, i) => (
           <div key={i} className='food-nutrition'>
@@ -111,7 +111,7 @@ function IngredientsInfo({ data }) {
           </div>
         ))}
         <br />
-        How many serving? <input type="text" name='seving' onChange={(e) => handleChange(e.target.value)} />
+        How many serving? <input type="text" className='number' name='seving' onChange={(e) => handleChange(e.target.value)} />
         <button onClick={handleClick}> Calculate Nutritoin per Serving </button>
         <div className='hidden'>
           <h3>Nutritions per serving</h3>
