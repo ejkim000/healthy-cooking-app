@@ -62,7 +62,7 @@ function SearchIngredient() {
                     </label>
                 </form>
             </div>
-            <NutritionInfo foods={foods} />
+            {/* <NutritionInfo foods={foods} /> */}
         </div>
     )
 }
