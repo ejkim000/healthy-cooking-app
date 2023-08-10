@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 h1 {
     font-size: 2.5em;
     line-height: 1.1;
@@ -10,12 +14,12 @@ button {
     cursor: pointer;
     transition: border-color 0.25s;
     margin: 0.5rem;
-    padding: 0.7rem;
+    padding: 0.8rem;
     line-height: 1;
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #60ff60;
 }
 button:focus,
 button:focus-visible {
@@ -24,18 +28,75 @@ button:focus-visible {
 
 
 .primary-button {
-    font-size: 1.2rem;
-    background-color: rgb(0, 0, 0);
+    font-size: 1.3rem;
+    background-color: #ff691e;
     color: white;
 }
 
 
 .secondary-button {
     font-size: 1rem;
-    background-color: rgb(71, 71, 71);
+    background-color: #8a8a8a;
     color: white;
 }
 
-.hidden {
-  display: none;
+
+input {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+.form-control {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 7.5em auto;
+  gap: 0.5em;
+}
+
+
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: #60ff60;
+  width: 1.5em;
+  height: 1.5em;
+  border: 0.15em solid #8a8a8a;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: #ff691e;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  outline-offset: max(2px, 0.15em);
+  
 }

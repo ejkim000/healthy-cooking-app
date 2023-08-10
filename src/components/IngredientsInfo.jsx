@@ -22,7 +22,7 @@ function IngredientsInfo({ data }) {
           setNutritionList((prev) => {
             return {
               ...prev,
-              [item.nutrientName]: (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation
+              [item.nutrientName]: (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation , brand name search dont have finalinput foods
             }
           })
         } else {
@@ -30,7 +30,7 @@ function IngredientsInfo({ data }) {
           setNutritionList((prev) => {
             return {
               ...prev,
-              [item.nutrientName]: prev[item.nutrientName] + (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation
+              [item.nutrientName]: prev[item.nutrientName] + (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation , brand name search dont have finalinput foods
             }
           })
         }

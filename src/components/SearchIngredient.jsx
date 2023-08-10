@@ -11,7 +11,7 @@ function SearchIngredient() {
 
     const url_SR_Legacy = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=SR%20Legacy&api_key=${APIKEY}`;
 
-    const url =`https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=${dataType}&pageSize=20&pageNumber=1&api_key=${APIKEY}`;
+    const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=${dataType}&pageSize=20&pageNumber=1&api_key=${APIKEY}`;
 
     const nutritionApiCall = async () => {
         const res = await fetch(url);
@@ -50,7 +50,13 @@ function SearchIngredient() {
             <form>
                 <input type="text" name='ingredient' placeholder='ingredient' onChange={handleChange} />
                 <button onClick={handleSearch} className='primary-button'>Search</button>
-                <br />Search in Brand <input type="checkbox" name="brand" onClick={handleCheckbox} />
+                <br />
+                <label className="form-control">
+                    Search in Brand
+                    <input type="checkbox" name="brand" onClick={handleCheckbox} />
+                </label>
+                
+                
             </form>
             <NutritionInfo foods={foods} />
         </div>
