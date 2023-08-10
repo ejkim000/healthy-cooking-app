@@ -53,7 +53,7 @@ function IngredientsInfo({ data }) {
   }
 
   const handleChange = (val) => {
-    setPerServing(val *1);
+    setPerServing(val * 1);
     console.log(perServing);
   }
 
@@ -89,8 +89,9 @@ function IngredientsInfo({ data }) {
 
 
   const loaded = () => {
-    return (<div>
-      <h3><img src="/src/assets/images/title-bg.png" alt="lemon"/>Selected Ingredients</h3><ul>
+    return (<div className="result">
+      <h3><img src="/src/assets/images/title-bg.png" alt="lemon" />Selected Ingredients</h3>
+      <ul>
         {selectedFoods.map((food) => {
           return (
             <li key={food.fdcId}>
@@ -102,26 +103,27 @@ function IngredientsInfo({ data }) {
         )}
       </ul>
       <div>
-        <h3><img src="/src/assets/images/title-bg.png" alt="lemon"/>Total nutrition information</h3>
+        <h3><img src="/src/assets/images/title-bg.png" alt="lemon" />Total nutrition information</h3>
         {/* Show only exisiting nutritions */}
         {Object.keys(nutritionList).filter(key => nutritionList[key] > 0).map((k, i) => (
           <div key={i} className='food-nutrition'>
-            <div>{k}</div>
-            <div>{nutritionList[k]}</div>
+            <div><b>{k}</b></div>
+            <div>{nutritionList[k]} </div>
           </div>
         ))}
-        <br />
-        How many serving? <input type="text" className='number' name='seving' onChange={(e) => handleChange(e.target.value)} />
-        <button onClick={handleClick}> Calculate Nutritoin per Serving </button>
-        <div className='hidden'>
-          <h3>Nutritions per serving</h3>
-          {/* show nutritions per serving */}
-          {/* {Object.keys(nutritionPerServing).filter(key => nutritionPerServing[key] > 0).map((k, i) => (
+        <div className="serving">
+          How many serving? <input type="number" pattern='[0-9]{0,5}' className='number' name='seving' onChange={(e) => handleChange(e.target.value)} />
+          <button className="secondary-button" onClick={handleClick}> Calculate Nutritoin per Serving </button>
+          <div className='hidden'>
+            <h3>Nutritions per serving</h3>
+            {/* show nutritions per serving */}
+            {/* {Object.keys(nutritionPerServing).filter(key => nutritionPerServing[key] > 0).map((k, i) => (
             <div key={i} className='food-nutrition'>
               <div>{k}</div>
               <div>{nutritionPerServing[k]}</div>
             </div>
           ))} */}
+          </div>
         </div>
       </div>
     </div>

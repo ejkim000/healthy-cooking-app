@@ -1,49 +1,44 @@
-.hidden {
-  display: none;
-}
-
 button {
-    border-radius: 6px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: border-color 0.25s;
-    margin: 0.5rem;
-    padding: 0.8rem;
-    line-height: 1;
+  border-radius: 6px;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  margin: 0.5rem;
+  padding: 0.8rem;
+  line-height: 1;
 }
 
 button:hover {
-  border-color: #000;
+  transform: scale(1.05);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 
 .primary-button {
-    font-size: 1.3rem;
-    background-color: #10c410;
-    color: white;
+  font-size: 1.3rem;
+  background-color: #10c410;
+  color: white;
 }
 
-
 .secondary-button {
-    font-size: 1rem;
-    font-weight: 600;
-    background-color: #14de5e;
-    color: #161616;
-    padding: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #10c410;
+  color: #161616;
+  padding: 0.7rem;
 }
 
 
 input {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   padding: 0.5rem;
+  width: min(50vw, 20rem);
+  border: 1px solid #000;
+  border-radius: 6px;
 }
 
 input.number {
   width: 5rem;
+  font-size: 1.3rem;
+  padding: 0.5rem;
 }
 
 .form-control {
@@ -59,13 +54,22 @@ input.number {
 }
 
 input[type="select"] {
-  margin: 0;
-  font: inherit;
-  width: 1.5em;
-  height: 1.5em;
-  border: 0.15em solid #8a8a8a;
-  border-radius: 0.15em;
-  transform: translateY(-0.075em);
+  appearance: none;
+  background-color: transparent;
+  border: none;
+}
+
+.select {
+  width: 9rem;
+  border: 1px solid #000;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  margin-left:6px;
 }
 
 input[type="checkbox"] {
@@ -77,10 +81,9 @@ input[type="checkbox"] {
   background-color: var(--form-background);
   /* Not removed via appearance */
   margin: 0;
-  font: inherit;
   width: 1.5em;
   height: 1.5em;
-  border: 0.15em solid #000;
+  border: 1px solid #000;
   border-radius: 0.15em;
   transform: translateY(-0.075em);
   background-color: white;
@@ -108,5 +111,5 @@ input[type="checkbox"]:checked::before {
 input[type="checkbox"]:focus {
   outline: none;
   outline-offset: max(2px, 0.15em);
-  
+
 }

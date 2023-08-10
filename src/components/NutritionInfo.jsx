@@ -7,7 +7,7 @@ function NutritionInfo({ foods }) {
     const [toggle, setToggle] = useState({});
     const [weight, setWeight] = useState({});
     const [unit, setUnit] = useState({});
-    const [resultStyle, setResultStyle] = useState('result');
+    const [resultStyle, setResultStyle] = useState('hidden');
 
     const handleToggle = (foodId) => {
         setToggle({
@@ -57,54 +57,59 @@ function NutritionInfo({ foods }) {
     }
 
     useEffect(() => {
-        setResultStyle('result');
+        if (foods.length > 0) {
+            setResultStyle('result');
+        }
+
     }, [foods])
 
     // add reset button later
 
     return (
-        <div>
-            <h3><img src="/src/assets/images/title-bg.png" alt="lemon"/>Search Result</h3>
-            <ol className={resultStyle}>
-                {foods !== undefined ? (foods.map((food) => {
-                    //console.log(food);
-                    return (
-                        <li key={food.fdcId}>
+        <>
+            <div className={resultStyle}>
+                <h3><img src="/src/assets/images/title-bg.png" alt="lemon" />Search Result</h3>
+                <ol>
+                    {foods !== undefined ? (foods.map((food) => {
+                        //console.log(food);
+                        return (
+                            <li key={food.fdcId}>
 
-                            {food.description} {food.dataType === 'Branded' && (` Brand: ${food.brandName} - ${food.brandOwner}`)}
+                                {food.description} {food.dataType === 'Branded' && (` Brand: ${food.brandName} - ${food.brandOwner}`)}
 
-                            <button onClick={(e) => handleToggle(food.fdcId, e)} className="secondary-button">
-                                {toggle[food.fdcId] ? "Hide" : "See"} Nutrition Info
-                            </button>
-                            <br />
 
-                            <input type="number" pattern='[0-9]{0,5}' className='number' onChange={(e) => handleChange(food.fdcId, e.target.value)} />
+                                <div>
+                                    <button onClick={(e) => handleToggle(food.fdcId, e)} className="secondary-button">
+                                        {toggle[food.fdcId] ? "Hide" : "See"} Nutrition Info
+                                    </button> / &nbsp;
+                                    <input type="number" pattern='[0-9]{0,5}' className='number' onChange={(e) => handleChange(food.fdcId, e.target.value)} />
 
-                            <select value={unit[food.fdcId]} onChange={(e) => handleSelect(food.fdcId, e.target.value)}>
-                                <option value="">Select weight unit</option>
-                                <option value="oz">oz</option>
-                                <option value="g">g</option>
-                            </select>
+                                    <select className="select" value={unit[food.fdcId]} onChange={(e) => handleSelect(food.fdcId, e.target.value)}>
+                                        <option value="">Weight unit</option>
+                                        <option value="oz">oz</option>
+                                        <option value="g">g</option>
+                                    </select>
 
-                            <button onClick={() => handleAdd(food)} className="secondary-button">Add to Recipe</button>
-                            <br />
-                            {/* Show only exisiting nutritions */}
-                            {food.foodNutrients.filter(item => item.value > 0).map((i) => {
-                                return (
-                                    <div key={i.nutrientId} className={toggle[food.fdcId] ? "food-nutrition" : "food-nutrition hidden"}>
-                                        <div><b>{i.nutrientName}</b></div>
-                                        <div>{i.value} {i.unitName}</div>
-                                    </div>
-                                )
-                            })}
-                        </li>
-                    )
-                })) : <li> Cannot find the ingredient you are looking for</li>
-                }
-            </ol>
-
+                                    <button onClick={() => handleAdd(food)} className="secondary-button">Add to Recipe</button>
+                                </div>
+                                {/* Show only exisiting nutritions */}
+                                {food.foodNutrients.filter(item => item.value > 0).map((i) => {
+                                    return (
+                                        <div key={i.nutrientId} className={toggle[food.fdcId] ? "food-nutrition" : "food-nutrition hidden"}>
+                                            <div><b>{i.nutrientName}</b></div>
+                                            <div>{i.value} {i.unitName}</div>
+                                        </div>
+                                    )
+                                })}
+                            </li>
+                        )
+                    })) : <li> Cannot find the ingredient you are looking for</li>
+                    }
+                </ol>
+            </div>
             <IngredientsInfo data={selectedFood} />
-        </div>
+
+        </>
 
     )
 }
