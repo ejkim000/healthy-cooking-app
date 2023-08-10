@@ -70,7 +70,7 @@ function NutritionInfo({ foods }) {
                 <div className={resultStyle}>
                     <h3><img src="/images/title-bg.png" alt="lemon" />Search Result</h3>
                     <ol>
-                        {foods.map((food) => {
+                        {/* {foods.map((food) => {
                             //console.log(food);
                             return (
                                 <li key={food.fdcId}>
@@ -92,7 +92,8 @@ function NutritionInfo({ foods }) {
 
                                         <button onClick={() => handleAdd(food)} className="secondary-button">Add to Recipe</button>
                                     </div>
-                                    {/* Show only exisiting nutritions */}
+
+                                    {/* Show only exisiting nutritions }
                                     {food.foodNutrients.filter(item => item.value > 0).map((i) => {
                                         return (
                                             <div key={i.nutrientId} className={toggle[food.fdcId] ? "food-nutrition" : "food-nutrition hidden"}>
@@ -103,7 +104,7 @@ function NutritionInfo({ foods }) {
                                     })}
                                 </li>
                             )
-                        })}
+                        })} */}
                     </ol>
                 </div>
                 <IngredientsInfo data={selectedFood} />
