@@ -3,6 +3,7 @@
 - EJ Kim
 - August 2023
 - Calculate your ingrediens' nutritions
+- Save user's data in the localstorage
 
 ## API
 - https://fdc.nal.usda.gov/api-guide.html

@@ -14,11 +14,15 @@ function SearchIngredient() {
     const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=${dataType}&pageSize=20&pageNumber=1&api_key=${APIKEY}`;
 
     const nutritionApiCall = async () => {
-        const res = await fetch(url);
-        const data = await res.json();
-        // console.log(data);
 
-        setFoods(data.foods);
+        try {
+            const res = await fetch(url);
+            const data = await res.json();    
+            setFoods(data.foods);
+        } catch(error) {
+            console.log(error);
+        }
+
     }
 
     const handleChange = ({ target }) => {
