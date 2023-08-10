@@ -2,6 +2,15 @@
     margin: 2rem;
 }
 
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+    
+}
+
 .food {
     font-weight: 600;
     font-size: 1.2rem;

@@ -3,10 +3,16 @@
 }
 
 h1 {
-    font-size: 2.5em;
-    line-height: 1.1;
-  }
-  
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+    text-align: center;
+}
+
+h2 {
+  text-align: center;
+  color: #666;
+}
 
 button {
     border-radius: 6px;
@@ -52,8 +58,10 @@ input {
   line-height: 1;
   display: grid;
   align-items: center;
-  grid-template-columns: 7.5em auto;
+  grid-template-columns: 9rem auto;
   gap: 0.5em;
+  align-content: center;
+  justify-content: center;
 }
 
 

@@ -46,17 +46,15 @@ function SearchIngredient() {
     };
 
     return (
-        <div>
+        <div className='form-container'>
             <form>
-                <input type="text" name='ingredient' placeholder='ingredient' onChange={handleChange} />
+                <input type="text" name='ingredient' placeholder='Type Ingredient' onChange={handleChange} />
                 <button onClick={handleSearch} className='primary-button'>Search</button>
                 <br />
                 <label className="form-control">
                     Search in Brand
                     <input type="checkbox" name="brand" onClick={handleCheckbox} />
                 </label>
-                
-                
             </form>
             <NutritionInfo foods={foods} />
         </div>

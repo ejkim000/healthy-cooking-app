@@ -2,7 +2,10 @@ import React from 'react'
 
 function Header() {
   return (
-    <h1>What do you eat today?</h1>
+    <>
+    <h1>What Do You Eat Today?</h1>
+    <h2>Nutrition Caculator</h2>
+    </>
   )
 }
 
