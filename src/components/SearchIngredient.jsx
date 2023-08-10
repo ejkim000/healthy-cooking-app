@@ -11,7 +11,7 @@ function SearchIngredient() {
 
     const url_SR_Legacy = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=SR%20Legacy&api_key=${APIKEY}`;
 
-    const url =`https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=${dataType}&pageSize=100&pageNumber=1&api_key=${APIKEY}`;
+    const url =`https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=${dataType}&pageSize=20&pageNumber=1&api_key=${APIKEY}`;
 
     const nutritionApiCall = async () => {
         const res = await fetch(url);
