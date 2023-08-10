@@ -4,6 +4,7 @@
 - August 2023
 - Calculate your ingrediens' nutritions
 - Save user's data in the localstorage
+- Support mobile view
 
 ## API
 - https://fdc.nal.usda.gov/api-guide.html
@@ -17,3 +18,5 @@
 > npm install
 > npm run dev
 ```
+## Live Site
+- https://healthy-cooking.netlify.app/
