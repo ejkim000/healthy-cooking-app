@@ -4,36 +4,61 @@ function IngredientsInfo({ data }) {
 
   const savedData = JSON.parse(localStorage.getItem('allFoods'));
   const [selectedFoods, setSelectedFoods] = useState(savedData);
-  const [nutritions, setNutritions] = useState([]);
   const [nutritionList, setNutritionList] = useState({});
+  const [nutritionPerServing, setNutritionPerServing] = useState({});
+  const [perServing, setPerServing] = useState(1);
 
   const handleRemove = (foodId) => {
     setSelectedFoods((prev) => prev.filter((food) => food.fdcId !== foodId));
   }
 
-  /* add all nutritions */
+  /* get all nutritions */
   const getTotalNutritions = () => {
     selectedFoods.map((food, i) => {
 
       food.foodNutrients.map((item) => {
-        /* init setup for the first food */
+        /* init nutrition list in the first round */
         if (i === 0) {
           setNutritionList((prev) => {
             return {
               ...prev,
-              [item.nutrientName]: (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight
+              [item.nutrientName]: (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation
             }
           })
         } else {
+          /* add nuritions from 2nd round*/
           setNutritionList((prev) => {
             return {
               ...prev,
-              [item.nutrientName]: prev[item.nutrientName] + (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight
+              [item.nutrientName]: prev[item.nutrientName] + (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation
             }
           })
         }
       });
     })
+  }
+
+  /* get nutritions per serving */
+  const getNutritionPerServing = () => {
+    console.log(nutritionList);
+    Object.keys(nutritionList).map((key, value) => (
+      setNutritionPerServing((prev) => {
+        console.log(key, value, perServing);
+        return {
+          ...prev,
+          [key]: (value / perServing) // the calculation is wrong
+        }
+      })
+    ))
+  }
+
+  const handleChange = (val) => {
+    setPerServing(val *1);
+    console.log(perServing);
+  }
+
+  const handleClick = () => {
+    getNutritionPerServing();
   }
 
   useEffect(() => {
@@ -55,11 +80,12 @@ function IngredientsInfo({ data }) {
   }, [selectedFoods]);
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log(nutritionList);
+  //   console.log(nutritionList);
+  //   console.log(nutritionPerServing);
 
-  }, [nutritionList]);
+  // }, [nutritionList, nutritionPerServing]);
 
 
   const loaded = () => {
@@ -84,19 +110,18 @@ function IngredientsInfo({ data }) {
             <div>{nutritionList[k]}</div>
           </div>
         ))}
-        
-        <div className='food-nutrition'>
-          <div>Nutrition Name</div>
-          <div>Fact</div>
-        </div>
-        How many serving? <input type="text" name='seving' />
-        <button> Calculate Nutritoin per Serving </button>
+        <br />
+        How many serving? <input type="text" name='seving' onChange={(e) => handleChange(e.target.value)} />
+        <button onClick={handleClick}> Calculate Nutritoin per Serving </button>
         <div className='hidden'>
           <h3>Nutritions per serving</h3>
-          <div className='food-nutrition'>
-            <div>Nutrition Name</div>
-            <div>Fact</div>
-          </div>
+          {/* show nutritions per serving */}
+          {/* {Object.keys(nutritionPerServing).filter(key => nutritionPerServing[key] > 0).map((k, i) => (
+            <div key={i} className='food-nutrition'>
+              <div>{k}</div>
+              <div>{nutritionPerServing[k]}</div>
+            </div>
+          ))} */}
         </div>
       </div>
     </div>
