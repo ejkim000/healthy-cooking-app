@@ -3,40 +3,41 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Albert Sans', sans-serif;
     background-image: url(../../assets/images/background-6703215_640.png);
+    height: 100vh;
 }
 
 h1 {
     line-height: 1;
-    margin-bottom: 0.2rem;
+    margin: 2vw;
     text-align: center;
     font-family: 'Luckiest Guy', cursive;
-    font-size: min(5.5vw, 6rem);
+    font-size: min(7vw, 4rem);
     -webkit-text-fill-color: #10c410;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
     letter-spacing: 0.5vw;
     width: 100%;
     text-align: center;
-    margin: 25px 10px 10px 10px;
 }
 
 h2 {
-    font-size: min(3vw, 3rem);
+    font-size: min(4.5vw, 2.5rem);
     text-align: center;
     color: #000;
+    margin: 1vw 2vw 1.5vw 2vw
 }
 
 h3 {
     margin: 2rem;
     padding: 0.5rem;
     background-color: #fff;
-    font-size: min(2.4vw, 2.4rem);
+    font-size: min(4.5vw, 1.7rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,29 +45,30 @@ h3 {
 }
 
 header {
-    margin: 2rem;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 2rem;
+    margin: 4vw;
+    padding: 2vw;
+    border-radius: 3vw;
     border: 2px black dashed;
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 ul {
     text-align: center;
     list-style-type: none;
-    margin: 2rem;
-    padding: 1rem;
+    margin: 3vw;
+    padding: 2vw;
     background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 2rem;
+    border-radius: 3vw;
     border: 2px black dashed;
 }
+
 ul>li {
-    font-size: min(2vw, 2rem);
+    font-size: min(4vw, 1.3rem);
 }
 
 ol>li {
-    margin-bottom: 1.5rem;;
-    font-size: min(2vw, 2rem);
+    margin-bottom: 1.5rem;
+    font-size: min(4vw, 1.3rem);
     font-weight: 600;
 }
 
@@ -76,9 +78,9 @@ ol>li {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 2rem;
-    padding: 2rem;
-    border-radius: 2rem;
+    margin: 4vw;
+    padding: 4vw;
+    border-radius: 3vw;
     border: 2px #10c410 dashed;
 }
 
@@ -122,4 +124,13 @@ ol>li {
 
 .hidden {
     display: none;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
 }
