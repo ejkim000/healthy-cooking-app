@@ -106,13 +106,12 @@ function NutritionInfo({ foods }) {
                         })}
                     </ol>
                 </div>
-                {/* <IngredientsInfo data={selectedFood} /> */}
+                <IngredientsInfo data={selectedFood} />
             </>
         )
     }
 
-    // const loading = () => <IngredientsInfo data={selectedFood} />;
-    const loading = () => null;
+    const loading = () => <IngredientsInfo data={selectedFood} />;
 
     return (foods !== undefined && foods.length > 0) ? loaded() : loading();
 }

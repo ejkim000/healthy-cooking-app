@@ -76,7 +76,7 @@ function IngredientsInfo({ data }) {
   useEffect(() => {
     localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
 
-    getTotalNutritions();
+    // getTotalNutritions();
   }, [selectedFoods]);
 
 
