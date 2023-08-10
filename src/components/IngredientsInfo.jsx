@@ -14,28 +14,32 @@ function IngredientsInfo({ data }) {
 
   /* get all nutritions */
   const getTotalNutritions = () => {
-    selectedFoods.map((food, i) => {
 
-      food.foodNutrients.map((item) => {
-        /* init nutrition list in the first round */
-        if (i === 0) {
-          setNutritionList((prev) => {
-            return {
-              ...prev,
-              [item.nutrientName]: (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation , brand name search dont have finalinput foods
-            }
-          })
-        } else {
-          /* add nuritions from 2nd round*/
-          setNutritionList((prev) => {
-            return {
-              ...prev,
-              [item.nutrientName]: prev[item.nutrientName] + (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation , brand name search dont have finalinput foods
-            }
-          })
-        }
-      });
-    })
+    if (selectedFoods !== undefined && selectedFoods.length > 0) {
+
+      selectedFoods.map((food, i) => {
+
+        food.foodNutrients.map((item) => {
+          /* init nutrition list in the first round */
+          if (i === 0) {
+            setNutritionList((prev) => {
+              return {
+                ...prev,
+                [item.nutrientName]: (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation , brand name search dont have finalinput foods
+              }
+            })
+          } else {
+            /* add nuritions from 2nd round*/
+            setNutritionList((prev) => {
+              return {
+                ...prev,
+                [item.nutrientName]: prev[item.nutrientName] + (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation , brand name search dont have finalinput foods
+              }
+            })
+          }
+        });
+      })
+    }
   }
 
   /* get nutritions per serving */
@@ -76,7 +80,7 @@ function IngredientsInfo({ data }) {
   useEffect(() => {
     localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
 
-    // getTotalNutritions();
+    getTotalNutritions();
   }, [selectedFoods]);
 
 
