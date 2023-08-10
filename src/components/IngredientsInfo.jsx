@@ -21,14 +21,14 @@ function IngredientsInfo({ data }) {
           setNutritionList((prev) => {
             return {
               ...prev,
-               [item.nutrientName]: (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight
+              [item.nutrientName]: (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight
             }
           })
         } else {
           setNutritionList((prev) => {
             return {
               ...prev,
-               [item.nutrientName]: prev[item.nutrientName] + (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight
+              [item.nutrientName]: prev[item.nutrientName] + (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight
             }
           })
         }
@@ -48,17 +48,17 @@ function IngredientsInfo({ data }) {
   }, [data]);
 
 
-
   useEffect(() => {
     localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
 
     getTotalNutritions();
   }, [selectedFoods]);
 
+
   useEffect(() => {
-    
+
     console.log(nutritionList);
-    
+
   }, [nutritionList]);
 
 
@@ -77,16 +77,14 @@ function IngredientsInfo({ data }) {
       </ul>
       <div>
         <h3>Total nutrition information</h3>
-
         {/* Show only exisiting nutritions */}
-        {/* { nutritionList.filter(item => item.value > 0).map((i) => {
-          return (
-            <div key={i.nutrientName} className='food-nutrition'>
-              <div>{i.nutrientName}</div>
-              <div>{i.value}</div>
-            </div>
-          )
-        })} */}
+        {Object.keys(nutritionList).filter(key => nutritionList[key] > 0).map((k, i) => (
+          <div key={i} className='food-nutrition'>
+            <div>{k}</div>
+            <div>{nutritionList[k]}</div>
+          </div>
+        ))}
+        
         <div className='food-nutrition'>
           <div>Nutrition Name</div>
           <div>Fact</div>
@@ -107,7 +105,7 @@ function IngredientsInfo({ data }) {
 
   const loading = () => null;
 
-  return (selectedFoods && selectedFoods.length > 0 && nutritionList) ? loaded() : loading();
+  return (selectedFoods && selectedFoods.length > 0 && Object.keys(nutritionList).length > 0) ? loaded() : loading();
 }
 
 export default IngredientsInfo;
