@@ -90,7 +90,7 @@ function IngredientsInfo({ data }) {
 
   const loaded = () => {
     return (<div className="result">
-      <h3><img src="/src/assets/images/title-bg.png" alt="lemon" />Selected Ingredients</h3>
+      <h3><img src="/images/title-bg.png" alt="lemon" />Selected Ingredients</h3>
       <ul>
         {selectedFoods.map((food) => {
           return (
@@ -103,7 +103,7 @@ function IngredientsInfo({ data }) {
         )}
       </ul>
       <div>
-        <h3><img src="../assets/images/title-bg.png" alt="lemon" />Total nutrition information</h3>
+        <h3><img src="/images/title-bg.png" alt="lemon" />Total nutrition information</h3>
         {/* Show only exisiting nutritions */}
         {Object.keys(nutritionList).filter(key => nutritionList[key] > 0).map((k, i) => (
           <div key={i} className='food-nutrition'>

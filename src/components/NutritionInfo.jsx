@@ -68,7 +68,7 @@ function NutritionInfo({ foods }) {
     return (
         <>
             <div className={resultStyle}>
-                <h3><img src="../assets/images/title-bg.png" alt="lemon" />Search Result</h3>
+                <h3><img src="/images/title-bg.png" alt="lemon" />Search Result</h3>
                 <ol>
                     {foods !== undefined ? (foods.map((food) => {
                         //console.log(food);
