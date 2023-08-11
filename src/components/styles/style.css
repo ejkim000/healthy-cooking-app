@@ -19,7 +19,7 @@ h1 {
     margin: 2vw;
     text-align: center;
     font-family: 'Luckiest Guy', cursive;
-    font-size: min(8vw, 4rem);
+    font-size: min(8vw, 4.25rem);
     -webkit-text-fill-color: #10c410;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
@@ -106,7 +106,7 @@ ol>li {
     margin: 1rem;
     padding: 0.5rem;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 1fr 1fr;
     grid-gap: 1rem;
     background-color: #abf497;
     font-weight: 400;

@@ -4,7 +4,7 @@ function IngredientsInfo({ data }) {
 
   const savedData = JSON.parse(localStorage.getItem('allFoods'));
   const [selectedFoods, setSelectedFoods] = useState(savedData);
-  const [nutritionList, setNutritionList] = useState({});
+  const [nutritionList, setNutritionList] = useState([]);
   const [nutritionPerServing, setNutritionPerServing] = useState({});
   const [perServing, setPerServing] = useState(1);
 
@@ -12,29 +12,37 @@ function IngredientsInfo({ data }) {
     setSelectedFoods((prev) => prev.filter((food) => food.fdcId !== foodId));
   }
 
+
   /* get all nutritions */
   const getTotalNutritions = () => {
 
     if (selectedFoods && selectedFoods.length > 0) {
 
-      selectedFoods.map((food, i) => {
-
+      selectedFoods.map((food) => {
         food.foodNutrients.map((item) => {
-          /* init nutrition list in the first round */
-          if (i === 0) {
+
+          if (item.value > 0) {
+            let gramWeight, nutritionValue = 0;
+
+            /* get brand search nutritions */
+            if (outerHeight.dataType === 'Branded') {
+              nutritionValue = ((item.value / food.servingSize) * food.weight).toFixed(2);
+  
+            /* get regular search nutritions */
+            } else {
+              gramWeight = food.finalFoodInputFoods.reduce((sum, i) => sum + i.gramWeight, 0);
+              nutritionValue = ((item.value / gramWeight) * food.weight).toFixed(2);
+            }
+
             setNutritionList((prev) => {
-              return {
+              return [
                 ...prev,
-                [item.nutrientName]: (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation , brand name search dont have finalinput foods
-              }
-            })
-          } else {
-            /* add nuritions from 2nd round*/
-            setNutritionList((prev) => {
-              return {
-                ...prev,
-                [item.nutrientName]: prev[item.nutrientName] + (item.value / food.finalFoodInputFoods[0].gramWeight) * food.weight //findout right calculation , brand name search dont have finalinput foods
-              }
+                {
+                  name: item.nutrientName,
+                  value: nutritionValue,
+                  unit: item.unitName
+                }
+              ]
             })
           }
         });
@@ -44,14 +52,18 @@ function IngredientsInfo({ data }) {
 
   /* get nutritions per serving */
   const getNutritionPerServing = () => {
-    console.log(nutritionList);
-    Object.keys(nutritionList).map((key, value) => (
+
+    nutritionList.map((item) => (
       setNutritionPerServing((prev) => {
-        console.log(key, value, perServing);
-        return {
+
+        return [
           ...prev,
-          [key]: (value / perServing) // the calculation is wrong
-        }
+          {
+            name: item.nutrientName,
+            value: (item.value / perServing).toFixed(2),
+            unit: item.unitName,
+          }
+        ]
       })
     ))
   }
@@ -109,10 +121,11 @@ function IngredientsInfo({ data }) {
       <div>
         <h3><img src="/images/title-bg.png" alt="lemon" />Total nutrition information</h3>
         {/* Show only exisiting nutritions */}
-        {Object.keys(nutritionList).filter(key => nutritionList[key] > 0).map((k, i) => (
-          <div key={i} className='food-nutrition'>
-            <div><b>{k}</b></div>
-            <div>{nutritionList[k]} </div>
+        {nutritionList.filter(item => item.value > 0).map((i, id) => (
+          <div key={id} className='food-nutrition'>
+            <div><b>{i.name}</b></div>
+            <div>{i.value}</div>
+            <div>{i.unit}</div>
           </div>
         ))}
         <div className="serving">
@@ -121,12 +134,12 @@ function IngredientsInfo({ data }) {
           <div className='hidden'>
             <h3>Nutritions per serving</h3>
             {/* show nutritions per serving */}
-            {/* {Object.keys(nutritionPerServing).filter(key => nutritionPerServing[key] > 0).map((k, i) => (
-            <div key={i} className='food-nutrition'>
-              <div>{k}</div>
-              <div>{nutritionPerServing[k]}</div>
-            </div>
-          ))} */}
+            {/* {nutritionPerServing.filter(item => item.value > 0).map((i, id) => (
+              <div key={id} className='food-nutrition'>
+                <div><b>{i.name}</b></div>
+                <div>{i.value} {i.unit}</div>
+              </div>
+            ))} */}
           </div>
         </div>
       </div>
@@ -136,7 +149,8 @@ function IngredientsInfo({ data }) {
 
   const loading = () => null;
 
-  return (selectedFoods && selectedFoods.length > 0 && Object.keys(nutritionList).length > 0) ? loaded() : loading();
+  // return (selectedFoods && selectedFoods.length > 0 && Object.keys(nutritionList).length > 0) ? loaded() : loading();
+  return (selectedFoods && selectedFoods.length > 0 && nutritionList.length > 0) ? loaded() : loading();
 }
 
 export default IngredientsInfo;
