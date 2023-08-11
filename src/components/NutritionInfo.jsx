@@ -75,7 +75,7 @@ function NutritionInfo({ foods }) {
                             return (
                                 <li key={food.fdcId}>
 
-                                    {food.description} {food.dataType === 'Branded' && (` Brand: ${food.brandName} - ${food.brandOwner}`)}
+                                    {food.description} {food.dataType === 'Branded' && (`/ Brand: ${food.brandName} - ${food.brandOwner}`)}
 
 
                                     <div>

@@ -33,9 +33,11 @@ function SearchIngredient() {
     };
 
     const handleCheckbox = ({ target }) => {
-        //console.log(target.value);
-        if (target.value === 'on') {
+        //alert(target.checked);
+        if (target.checked) {
             setDataType('Branded');
+        } else {
+            setDataType('Survey%20%28FNDDS%29');
         }
     };
 
@@ -52,7 +54,7 @@ function SearchIngredient() {
     useEffect(() => {
         setFoods([]);
     },[])
-    
+
     return (
         <div className='container'>
             <div className='form-container'>
