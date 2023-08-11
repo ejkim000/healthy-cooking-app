@@ -26,12 +26,23 @@
 
 
 2. Component Design
-- Header: top header
-- Container: contains all contents
-- SearchIngredient: Search form, search food ingredient via API
-- NutritIoninfo: Get all food information, include nutrition info. See/Hide toggle. Save user's data in the localstorage
-- IngredientInfo: Gather all ingredient's information to show combined nutritions. Also shows perservign nutritions as well.
-- Footer: sticky to the bottom
+- Header
+    - top header
+- Container
+    - contains all contents
+- SearchIngredient
+    - Search form
+    - Search food ingredient via API
+- NutritIoninfo
+    - Get all food information, include nutrition info.
+    - Save food info in the localstorage
+    - See/Hide toggle
+- IngredientInfo
+    - Gather all ingredient's information to show combined nutritions
+    - Contains PerServing Calculation form
+    - Show per serving nutritions
+- Footer
+    - Sticky to the bottom
 
 
 3. Styling
