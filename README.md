@@ -22,7 +22,8 @@
 
 ## Approach Taken
 1. Project Setup
-Set up your development environment by installing Node.js, npm, and VITE (Node Package Manager).
+- Set up your development environment by installing Node.js, npm, and VITE (Node Package Manager).
+
 
 2. Component Design
 - Header: top header
@@ -32,6 +33,7 @@ Set up your development environment by installing Node.js, npm, and VITE (Node P
 - IngredientInfo: Gather all ingredient's information to show combined nutritions. Also shows perservign nutritions as well.
 - Footer: sticky to the bottom
 
+
 3. Styling
 - Use CSS files to style components.
 - /src/components/styles
@@ -39,9 +41,11 @@ Set up your development environment by installing Node.js, npm, and VITE (Node P
 - style.css: style of component
 - Support mobile view
 
+
 4. Testing
 - Tested in the local dev mode
 - Tested in the production mode after deply in Netlify
+
 
 5. Deployment
 - Netlify
