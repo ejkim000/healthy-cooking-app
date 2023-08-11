@@ -81,13 +81,12 @@ function NutritionInfo({ foods }) {
                                     <div>
                                         <button onClick={(e) => handleToggle(food.fdcId, e)} className="secondary-button">
                                             {toggle[food.fdcId] ? "Hide" : "See"} Nutrition Info
-                                        </button> / &nbsp;
+                                        </button> / Weight:&nbsp; 
                                         <input type="number" pattern='[0-9]{0,5}' className='number' onChange={(e) => handleChange(food.fdcId, e.target.value)} />
 
                                         <select className="select" value={unit[food.fdcId]} onChange={(e) => handleSelect(food.fdcId, e.target.value)}>
-                                            <option value="">Weight unit</option>
-                                            <option value="oz">oz</option>
                                             <option value="g">g</option>
+                                            <option value="oz">oz</option>
                                         </select>
 
                                         <button onClick={() => handleAdd(food)} className="secondary-button">Add to Recipe</button>
