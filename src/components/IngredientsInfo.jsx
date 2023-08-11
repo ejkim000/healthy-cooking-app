@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, userReducer } from "react";
 
 function IngredientsInfo({ data }) {
 
   const savedData = JSON.parse(localStorage.getItem('allFoods'));
   const [selectedFoods, setSelectedFoods] = useState(savedData);
   const [nutritionList, setNutritionList] = useState([]);
-  const [nutritionPerServing, setNutritionPerServing] = useState({});
+  const [nutritionPerServing, setNutritionPerServing] = useState([]);
   const [perServing, setPerServing] = useState(1);
+  const [resultStyle, setResultStyle] = useState('hidden');
 
   const handleRemove = (foodId) => {
     setSelectedFoods((prev) => prev.filter((food) => food.fdcId !== foodId));
   }
 
+  function reducer(state, action) {
+
+  }
 
   /* get all nutritions */
   const getTotalNutritions = () => {
@@ -19,34 +23,38 @@ function IngredientsInfo({ data }) {
     if (selectedFoods && selectedFoods.length > 0) {
 
       selectedFoods.map((food) => {
+
         food.foodNutrients.map((item) => {
 
-          if (item.value > 0) {
-            let gramWeight, nutritionValue = 0;
+          let gramWeight, nutritionValue = 0;
 
+          if (item.value > 0) {
             /* get brand search nutritions */
             if (outerHeight.dataType === 'Branded') {
               nutritionValue = ((item.value / food.servingSize) * food.weight).toFixed(2);
-  
-            /* get regular search nutritions */
+
+              /* get regular search nutritions */
             } else {
               gramWeight = food.finalFoodInputFoods.reduce((sum, i) => sum + i.gramWeight, 0);
               nutritionValue = ((item.value / gramWeight) * food.weight).toFixed(2);
             }
-
-            setNutritionList((prev) => {
-              return [
-                ...prev,
-                {
-                  name: item.nutrientName,
-                  value: nutritionValue,
-                  unit: item.unitName
-                }
-              ]
-            })
           }
+
+          setNutritionList((prev) => {
+            //nutritionValue = prev.value ? nutritionValue + prev.value : nutritionValue;
+            return [
+              ...prev,
+              {
+                name: item.nutrientName,
+                value: nutritionValue,
+                unit: item.unitName
+              }
+            ]
+          });
+
         });
-      })
+      });
+
     }
   }
 
@@ -55,13 +63,12 @@ function IngredientsInfo({ data }) {
 
     nutritionList.map((item) => (
       setNutritionPerServing((prev) => {
-
         return [
           ...prev,
           {
-            name: item.nutrientName,
+            name: item.name,
             value: (item.value / perServing).toFixed(2),
-            unit: item.unitName,
+            unit: item.unit,
           }
         ]
       })
@@ -88,7 +95,6 @@ function IngredientsInfo({ data }) {
     }
   }, [data]);
 
-
   useEffect(() => {
     localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
 
@@ -96,12 +102,19 @@ function IngredientsInfo({ data }) {
   }, [selectedFoods]);
 
 
-  // useEffect(() => {
+  useEffect(() => {
+    console.log(nutritionList);
+    /* get sum of each nutritions */
+    // nutritionList.reduce((sum, item) => {
+    //   sum + item.credit
+    // }, 0);
+  }, [nutritionList]);
 
-  //   console.log(nutritionList);
-  //   console.log(nutritionPerServing);
+  useEffect(() => {
 
-  // }, [nutritionList, nutritionPerServing]);
+    perServing > 0 && setResultStyle('result');
+
+  }, [perServing]);
 
 
   const loaded = () => {
@@ -131,15 +144,16 @@ function IngredientsInfo({ data }) {
         <div className="serving">
           How many serving? <input type="number" pattern='[0-9]{0,5}' className='number' name='seving' onChange={(e) => handleChange(e.target.value)} />
           <button className="secondary-button" onClick={handleClick}> Calculate Nutritoin per Serving </button>
-          <div className='hidden'>
-            <h3>Nutritions per serving</h3>
+          <div className={resultStyle}>
+            <h3><img src="/images/title-bg.png" alt="lemon" />Nutritions per serving</h3>
             {/* show nutritions per serving */}
-            {/* {nutritionPerServing.filter(item => item.value > 0).map((i, id) => (
+            {console.log(nutritionPerServing)}
+            {nutritionPerServing.length > 0 && nutritionPerServing.map((item, id) => (
               <div key={id} className='food-nutrition'>
-                <div><b>{i.name}</b></div>
-                <div>{i.value} {i.unit}</div>
+                <div><b>{item.name}</b></div>
+                <div>{item.value} {item.unit}</div>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
       </div>
@@ -149,7 +163,6 @@ function IngredientsInfo({ data }) {
 
   const loading = () => null;
 
-  // return (selectedFoods && selectedFoods.length > 0 && Object.keys(nutritionList).length > 0) ? loaded() : loading();
   return (selectedFoods && selectedFoods.length > 0 && nutritionList.length > 0) ? loaded() : loading();
 }
 
