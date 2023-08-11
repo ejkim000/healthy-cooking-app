@@ -3,8 +3,6 @@
 - React App Project
 - EJ Kim
 - August 2023
-- Save user's data in the localstorage
-- Support mobile view
 
 ## Live Site
 - https://healthy-cooking.netlify.app/
@@ -30,7 +28,7 @@ Set up your development environment by installing Node.js, npm, and VITE (Node P
 - Header: top header
 - Container: contains all contents
 - SearchIngredient: Search form, search food ingredient via API
-- NutritIoninfo: Get all food information, include nutrition info. See/Hide toggle
+- NutritIoninfo: Get all food information, include nutrition info. See/Hide toggle. Save user's data in the localstorage
 - IngredientInfo: Gather all ingredient's information to show combined nutritions. Also shows perservign nutritions as well.
 - Footer: sticky to the bottom
 
@@ -39,17 +37,19 @@ Set up your development environment by installing Node.js, npm, and VITE (Node P
 - /src/components/styles
 - utility.css : style of elements
 - style.css: style of component
+- Support mobile view
 
 4. Testing
 - Tested in the local dev mode
 - Tested in the production mode after deply in Netlify
 
 5. Deployment
+- Netlify
 - https://healthy-cooking.netlify.app/
-- Make sure API KEy stays in the .env file and set up this in the Netlify website
+- Make sure APIKEY stays in the .env file and set up this in the Netlify website
 
 ## Unsolved Problems
 1. Calculation of each Nutrition 
-    - I see some values are infinity, fix this issue
-2. Combining same nutrition togather
+    - I see some values are infinity, update calculation fix this issue
+2. Combining same nutrition together
     - Have to figure out which method I will use for this
