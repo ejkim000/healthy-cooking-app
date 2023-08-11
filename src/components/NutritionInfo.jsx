@@ -85,6 +85,7 @@ function NutritionInfo({ foods }) {
                                         <input type="number" pattern='[0-9]{0,5}' className='number' onChange={(e) => handleChange(food.fdcId, e.target.value)} />
 
                                         <select className="select" value={unit[food.fdcId]} onChange={(e) => handleSelect(food.fdcId, e.target.value)}>
+                                            <option value="">Unit</option>
                                             <option value="g">g</option>
                                             <option value="oz">oz</option>
                                         </select>

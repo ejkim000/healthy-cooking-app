@@ -2,7 +2,7 @@
 - React App Project
 - EJ Kim
 - August 2023
-- Calculate your ingrediens' nutritions
+- Calculate your food nutritions
 - Save user's data in the localstorage
 - Support mobile view
 
