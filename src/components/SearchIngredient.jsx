@@ -52,6 +52,7 @@ function SearchIngredient() {
     };
 
     useEffect(() => {
+        //localStorage.clear();
         setFoods([]);
     },[])
 

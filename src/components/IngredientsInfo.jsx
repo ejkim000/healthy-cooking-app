@@ -15,7 +15,7 @@ function IngredientsInfo({ data }) {
   /* get all nutritions */
   const getTotalNutritions = () => {
 
-    if (selectedFoods !== undefined && selectedFoods.length > 0) {
+    if (selectedFoods && selectedFoods.length > 0) {
 
       selectedFoods.map((food, i) => {
 
