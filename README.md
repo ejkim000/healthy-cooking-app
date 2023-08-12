@@ -72,4 +72,4 @@
 
 
 ## Unsolved Problem
-- Not a problem, but want to add food reset button later
+- Check the 'Branded' food nutritions in deatail 

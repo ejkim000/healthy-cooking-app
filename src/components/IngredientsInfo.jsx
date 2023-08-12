@@ -164,11 +164,12 @@ function IngredientsInfo({ data }) {
           <div className={resultStyle}>
             <h3><img src="/images/title-bg.png" alt="lemon" />Nutritions Per Serving</h3>
             {/* show nutritions per serving */}
-            {nutritionPerServing.length > 0 && nutritionPerServing.map((item, id) => (
+            {nutritionPerServing.length > 0 
+            && nutritionPerServing.filter(item => item.value > 0).map((i, id) => (
               <div key={id} className='food-nutrition'>
-                <div><b>{item.name}</b></div>
-                <div>{item.value}</div>
-                <div>{item.unit}</div>
+                <div><b>{i.name}</b></div>
+                <div>{i.value}</div>
+                <div>{i.unit}</div>
               </div>
             ))}
           </div>
