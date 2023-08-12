@@ -1,24 +1,20 @@
 # Healthy Cooking App
 - Calculate your food nutritions
 - React App Project
+- Support Mobile View
+- Save user's ingrdients in the localstorage
+-------
 - EJ Kim
 - August 2023
+
 
 ## Live Site
 - https://healthy-cooking.netlify.app/
 
+
 ## API
 - https://fdc.nal.usda.gov/api-guide.html
 
-## VITE
-- Installatin & run
-``` 
-> npm create vite@latest 
-> project-name -> react -> javascript
-> cd project-name
-> npm install
-> npm run dev
-```
 
 ## Approach Taken
 1. Project Setup
@@ -62,6 +58,18 @@
 - Netlify
 - https://healthy-cooking.netlify.app/
 - Make sure APIKEY stays in the .env file and set up this in the Netlify website
+
+
+## VITE
+- Installatin & run
+``` 
+> npm create vite@latest 
+> project-name -> react -> javascript
+> cd project-name
+> npm install
+> npm run dev
+```
+
 
 ## Unsolved Problems
 1. Calculation of each Nutrition 
