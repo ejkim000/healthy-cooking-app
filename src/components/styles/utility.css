@@ -4,7 +4,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   margin: 0.5rem;
-  padding: 0.8rem;
+  padding: min(3vw, 0.8rem);
   line-height: 1;
 }
 
@@ -13,7 +13,7 @@ button:hover {
 }
 
 .primary-button {
-  font-size: 1.3rem;
+  font-size: min(4vw, 1.3rem);
   background-color: #10c410;
   color: white;
 }
@@ -28,9 +28,9 @@ button:hover {
 
 
 input {
-  font-size: 1.4rem;
+  font-size: min(4.3vw, 1.4rem);
   padding: 0.5rem;
-  width: min(50vw, 20rem);
+  width: min(35vw, 20rem);
   border: 1px solid #000;
   border-radius: 6px;
 }

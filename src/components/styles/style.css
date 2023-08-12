@@ -91,8 +91,8 @@ ol>li {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 1.5rem 0;
-    padding: 3rem;
+    margin: 1rem 0;
+    padding: min(8vw, 3rem);
     border-radius: 2rem;
     border: 2px solid #10c410;
 }
