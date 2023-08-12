@@ -132,7 +132,7 @@ function IngredientsInfo({ data }) {
         )}
       </ul>
       <div>
-        <h3><img src="/images/title-bg.png" alt="lemon" />Total nutrition information</h3>
+        <h3><img src="/images/title-bg.png" alt="lemon" />Total Nutrition Information</h3>
         {/* Show only exisiting nutritions */}
         {nutritionList.filter(item => item.value > 0).map((i, id) => (
           <div key={id} className='food-nutrition'>
@@ -143,9 +143,9 @@ function IngredientsInfo({ data }) {
         ))}
         <div className="serving">
           How many serving? <input type="number" pattern='[0-9]{0,5}' className='number' name='seving' onChange={(e) => handleChange(e.target.value)} />
-          <button className="secondary-button" onClick={handleClick}> Calculate Nutritoin per Serving </button>
+          <button className="secondary-button" onClick={handleClick}> Calculate Nutritoin Per Serving </button>
           <div className={resultStyle}>
-            <h3><img src="/images/title-bg.png" alt="lemon" />Nutritions per serving</h3>
+            <h3><img src="/images/title-bg.png" alt="lemon" />Nutritions Per Serving</h3>
             {/* show nutritions per serving */}
             {console.log(nutritionPerServing)}
             {nutritionPerServing.length > 0 && nutritionPerServing.map((item, id) => (
