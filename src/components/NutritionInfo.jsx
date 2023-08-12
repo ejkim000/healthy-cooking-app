@@ -9,6 +9,7 @@ function NutritionInfo({ foods }) {
     const [unit, setUnit] = useState({});
     const [resultStyle, setResultStyle] = useState('hidden');
 
+    /* show/hide nutritions of each food by toggle */
     const handleToggle = (foodId) => {
         setToggle({
             ...toggle,
@@ -16,8 +17,8 @@ function NutritionInfo({ foods }) {
         });
     }
 
+    /* check val is number, then save */
     const handleChange = (foodId, val) => {
-        /* check val is number, then save */
         val = val * 1;
 
         !isNaN(val) && setWeight(prev => {
@@ -28,8 +29,8 @@ function NutritionInfo({ foods }) {
         });
     }
 
+    /* check selected unit is not empty, then save*/
     const handleSelect = (foodId, val) => {
-        /* check selected unit is not empty, then save*/
         (val !== '') && setUnit(prev => {
             return {
                 ...prev,
@@ -38,8 +39,8 @@ function NutritionInfo({ foods }) {
         });
     }
 
+    /* Add weight and unit to the selectedFood */
     const addWeightunit = () => {
-        /* Add weight and unit to the selectedFood */
         setSelectedFood(prev => {
             return {
                 ...prev,
@@ -63,6 +64,7 @@ function NutritionInfo({ foods }) {
 
     }, [foods])
 
+
     // add reset button later
     const loaded = () => {
         return (
@@ -71,13 +73,9 @@ function NutritionInfo({ foods }) {
                     <h3><img src="/images/title-bg.png" alt="lemon" />Search Result</h3>
                     <ol>
                         {foods.map((food) => {
-                            //console.log(food);
                             return (
                                 <li key={food.fdcId}>
-
                                     {food.description} {food.dataType === 'Branded' && (`/ Brand: ${food.brandName} - ${food.brandOwner}`)}
-
-
                                     <div>
                                         <button onClick={(e) => handleToggle(food.fdcId, e)} className="secondary-button">
                                             {toggle[food.fdcId] ? "Hide" : "See"} Nutrition Info

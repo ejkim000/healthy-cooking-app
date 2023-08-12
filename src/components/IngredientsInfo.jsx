@@ -1,21 +1,14 @@
-import { useEffect, useState, userReducer } from "react";
+import { useEffect, useState } from "react";
 
 function IngredientsInfo({ data }) {
 
   const savedData = JSON.parse(localStorage.getItem('allFoods'));
   const [selectedFoods, setSelectedFoods] = useState(savedData);
   const [nutritionList, setNutritionList] = useState([]);
+  const [combinedNutritionList, setCombinedNutritionList] = useState([]);
   const [nutritionPerServing, setNutritionPerServing] = useState([]);
   const [perServing, setPerServing] = useState(1);
   const [resultStyle, setResultStyle] = useState('hidden');
-
-  const handleRemove = (foodId) => {
-    setSelectedFoods((prev) => prev.filter((food) => food.fdcId !== foodId));
-  }
-
-  function reducer(state, action) {
-
-  }
 
   /* get all nutritions */
   const getTotalNutritions = () => {
@@ -39,9 +32,8 @@ function IngredientsInfo({ data }) {
               nutritionValue = ((item.value / gramWeight) * food.weight).toFixed(2);
             }
           }
-
+          /* add all the nutritions to the list */
           setNutritionList((prev) => {
-
             return [
               ...prev,
               {
@@ -51,17 +43,15 @@ function IngredientsInfo({ data }) {
               }
             ]
           });
-
         });
       });
-
     }
   }
 
   /* get nutritions per serving */
   const getNutritionPerServing = () => {
 
-    nutritionList.map((item) => (
+    combinedNutritionList.map((item) => (
       setNutritionPerServing((prev) => {
         return [
           ...prev,
@@ -84,6 +74,10 @@ function IngredientsInfo({ data }) {
     getNutritionPerServing();
   }
 
+  const handleRemove = (foodId) => {
+    setSelectedFoods((prev) => prev.filter((food) => food.fdcId !== foodId));
+  }
+
   useEffect(() => {
     /* add received data to the selectedFoods and local storage */
     if (Object.keys(data).length > 0) {
@@ -95,26 +89,49 @@ function IngredientsInfo({ data }) {
     }
   }, [data]);
 
-  useEffect(() => {
-    localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
 
+  useEffect(() => {
+    /* save slsectedFoods to the local storage */
+    localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
+    /* get total nutritions of selectedFood */
     getTotalNutritions();
+
   }, [selectedFoods]);
 
 
   useEffect(() => {
-    console.log(nutritionList);
-    /* get sum of each nutritions */
-    // nutritionList.reduce((sum, item) => {
-    //   sum + item.credit
-    // }, 0);
+    /* use redce to combine nutrition values */
+    const getCombinedNutritionList = nutritionList.reduce((items, item) => {
+      const { name, value, unit } = item;
+      const itemIndex = items.findIndex(item => item.name === name)
+      if (itemIndex === -1) {
+        items.push({
+          name, value, unit
+        });
+      } else {
+        items[itemIndex].value = (items[itemIndex].value * 1 + value * 1).toFixed(2);
+      }
+
+      return items;
+    }, []);
+
+    setCombinedNutritionList(getCombinedNutritionList);
+
   }, [nutritionList]);
+
 
   useEffect(() => {
 
     perServing > 0 && setResultStyle('result');
 
   }, [perServing]);
+
+
+  useEffect(() => {
+
+    //console.log(combinedNutritionList);
+
+  }, [combinedNutritionList]);
 
 
   const loaded = () => {
@@ -134,7 +151,7 @@ function IngredientsInfo({ data }) {
       <div>
         <h3><img src="/images/title-bg.png" alt="lemon" />Total Nutrition Information</h3>
         {/* Show only exisiting nutritions */}
-        {nutritionList.filter(item => item.value > 0).map((i, id) => (
+        {combinedNutritionList.filter(item => item.value > 0).map((i, id) => (
           <div key={id} className='food-nutrition'>
             <div><b>{i.name}</b></div>
             <div>{i.value}</div>
@@ -147,7 +164,6 @@ function IngredientsInfo({ data }) {
           <div className={resultStyle}>
             <h3><img src="/images/title-bg.png" alt="lemon" />Nutritions Per Serving</h3>
             {/* show nutritions per serving */}
-            {console.log(nutritionPerServing)}
             {nutritionPerServing.length > 0 && nutritionPerServing.map((item, id) => (
               <div key={id} className='food-nutrition'>
                 <div><b>{item.name}</b></div>
@@ -164,7 +180,11 @@ function IngredientsInfo({ data }) {
 
   const loading = () => null;
 
-  return (selectedFoods && selectedFoods.length > 0 && nutritionList.length > 0) ? loaded() : loading();
+  return (selectedFoods
+    && selectedFoods.length > 0
+    && nutritionList.length > 0
+    && combinedNutritionList.length > 0
+  ) ? loaded() : loading();
 }
 
 export default IngredientsInfo;
