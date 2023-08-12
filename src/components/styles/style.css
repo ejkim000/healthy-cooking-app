@@ -137,6 +137,7 @@ ol > li > .food-nutrition {
 .result {
     display: flex;
     flex-direction: column;
+    text-align: left;
 }
 
 .hidden {
