@@ -72,4 +72,5 @@
 
 
 ## Unsolved Problem
+- When remove ingredient, the nutrition value goes up
 - Check the 'Branded' food nutritions in deatail 
