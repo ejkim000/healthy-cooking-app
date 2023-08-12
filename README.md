@@ -71,6 +71,5 @@
 ```
 
 
-## Unsolved Problems
-1. Combining same nutrition together
-    - Have to figure out which method I will use for this
+## Unsolved Problem
+- Not a problem, but want to add food reset button later
