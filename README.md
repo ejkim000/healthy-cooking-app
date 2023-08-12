@@ -75,3 +75,7 @@
 - When remove ingredient, the nutrition value goes up
 - Add calculation for the oz unit
 - Check the 'Branded' food nutritions in deatail 
+
+
+## Upgrade Version
+- Later, add "Make your own recipe" part and connect to the backend
