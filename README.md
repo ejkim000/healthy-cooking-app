@@ -72,7 +72,5 @@
 
 
 ## Unsolved Problems
-1. Calculation of each Nutrition 
-    - I see some values are infinity, update calculation fix this issue
-2. Combining same nutrition together
+1. Combining same nutrition together
     - Have to figure out which method I will use for this

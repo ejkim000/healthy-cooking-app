@@ -23,14 +23,14 @@ function IngredientsInfo({ data }) {
     if (selectedFoods && selectedFoods.length > 0) {
 
       selectedFoods.map((food) => {
-        
+
         food.foodNutrients.map((item) => {
 
           let gramWeight, nutritionValue = 0;
 
           if (item.value * 1 > 0) {
             /* get brand search nutritions */
-            if (outerHeight.dataType === 'Branded') {
+            if (food.dataType === 'Branded') {
               nutritionValue = ((item.value / food.servingSize) * food.weight).toFixed(2);
 
               /* get regular search nutritions */
@@ -41,7 +41,7 @@ function IngredientsInfo({ data }) {
           }
 
           setNutritionList((prev) => {
-           
+
             return [
               ...prev,
               {
