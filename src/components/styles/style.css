@@ -118,7 +118,7 @@ ol > li > .food-nutrition {
 }
 
 .food-nutrition {
-    margin: 1rem 0;
+    margin-bottom: 1rem;
     padding: 0.5rem;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
