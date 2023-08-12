@@ -9,7 +9,7 @@ function SearchIngredient() {
     const [dataType, setDataType] = useState('Survey%20%28FNDDS%29');
     const APIKEY = import.meta.env.VITE_API_KEY;
 
-    const url_SR_Legacy = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=SR%20Legacy&api_key=${APIKEY}`;
+    // const url_SR_Legacy = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=SR%20Legacy&api_key=${APIKEY}`;
 
     const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&dataType=${dataType}&pageSize=20&pageNumber=1&api_key=${APIKEY}`;
 
@@ -17,12 +17,13 @@ function SearchIngredient() {
 
         try {
             const res = await fetch(url);
-            const data = await res.json();    
-            setFoods(data.foods);
+            const data = await res.json();  
+             
+            data.foods.length > 0 ? setFoods(data.foods) : alert('Cannot find the food information');
+        
         } catch(error) {
             console.log(error);
         }
-
     }
 
     const handleChange = ({ target }) => {
