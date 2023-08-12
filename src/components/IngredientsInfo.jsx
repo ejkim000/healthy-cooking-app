@@ -151,7 +151,8 @@ function IngredientsInfo({ data }) {
             {nutritionPerServing.length > 0 && nutritionPerServing.map((item, id) => (
               <div key={id} className='food-nutrition'>
                 <div><b>{item.name}</b></div>
-                <div>{item.value} {item.unit}</div>
+                <div>{item.value}</div>
+                <div>{item.unit}</div>
               </div>
             ))}
           </div>

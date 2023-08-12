@@ -35,7 +35,7 @@ h2 {
 }
 
 h3 {
-    margin: 2rem;
+    margin: min(vw, 2rem);
     padding: 0.5rem;
     background-color: #fff;
     font-size: min(4.5vw, 1.7rem);
@@ -56,22 +56,37 @@ header {
 ul {
     text-align: center;
     list-style-type: none;
-    margin: 3vw;
     padding: 2vw;
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 3vw;
     border: 2px black dashed;
 }
 
-ul>li {
+ul > li {
     font-size: min(4vw, 1.3rem);
 }
 
-ol>li {
-    margin-bottom: 1.5rem;
+
+ol {
+    display: block;
+    list-style-type: decimal;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 20px;
+}
+
+ol > li {
+    margin-bottom:20px;
     font-size: min(4vw, 1.3rem);
     font-weight: 600;
 }
+ol > li > div {
+    margin-left: -20px;
+}
+ol > li > .food-nutrition {
+    margin-left: -20px;
+}
+
 
 .container {
     background-color: rgba(255, 240, 104, 0.8);
@@ -103,13 +118,14 @@ ol>li {
 }
 
 .food-nutrition {
-    margin: 1rem;
+    margin: 1rem 0;
     padding: 0.5rem;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
     grid-gap: 1rem;
     background-color: #abf497;
     font-weight: 400;
+    font-size: min(4vw, 1.3rem);
 }
 
 .serving {

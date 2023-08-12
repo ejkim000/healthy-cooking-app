@@ -97,7 +97,8 @@ function NutritionInfo({ foods }) {
                                         return (
                                             <div key={i.nutrientId} className={toggle[food.fdcId] ? "food-nutrition" : "food-nutrition hidden"}>
                                                 <div><b>{i.nutrientName}</b></div>
-                                                <div>{i.value} {i.unitName}</div>
+                                                <div>{i.value}</div>
+                                                <div>{i.unitName}</div>
                                             </div>
                                         )
                                     })}
