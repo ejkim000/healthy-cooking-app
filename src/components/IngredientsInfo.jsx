@@ -5,6 +5,7 @@ function IngredientsInfo({ data }) {
   const savedData = JSON.parse(localStorage.getItem('allFoods'));
   const [selectedFoods, setSelectedFoods] = useState(savedData);
   const [nutritionList, setNutritionList] = useState([]);
+  const [filteredNutritionList, setFilteredNutritionList] = useState([]);
   const [combinedNutritionList, setCombinedNutritionList] = useState([]);
   const [nutritionPerServing, setNutritionPerServing] = useState([]);
   const [perServing, setPerServing] = useState(1);
@@ -32,11 +33,13 @@ function IngredientsInfo({ data }) {
               nutritionValue = ((item.value / gramWeight) * food.weight).toFixed(2);
             }
           }
-          /* add all the nutritions to the list */
+
+          /* add all the nutritions to the list : somehow, duplicated adding happens - needed to filter*/
           setNutritionList((prev) => {
             return [
               ...prev,
               {
+                fdcId: food.fdcId,
                 name: item.nutrientName,
                 value: nutritionValue,
                 unit: item.unitName
@@ -56,6 +59,7 @@ function IngredientsInfo({ data }) {
         return [
           ...prev,
           {
+            fdcId: item.fdcId,
             name: item.name,
             value: (item.value / perServing).toFixed(2),
             unit: item.unit,
@@ -81,8 +85,7 @@ function IngredientsInfo({ data }) {
   useEffect(() => {
     /* add received data to the selectedFoods and local storage */
     if (Object.keys(data).length > 0) {
-
-      selectedFoods ? setSelectedFoods(prev => [
+      selectedFoods.length > 0 ? setSelectedFoods(prev => [
         ...prev,
         data
       ]) : setSelectedFoods([data]);
@@ -100,24 +103,48 @@ function IngredientsInfo({ data }) {
 
 
   useEffect(() => {
-    /* use redce to combine nutrition values */
-    const getCombinedNutritionList = nutritionList.reduce((items, item) => {
-      const { name, value, unit } = item;
-      const itemIndex = items.findIndex(item => item.name === name)
+    /* use reduce to prevent duplicated nutrition items */
+    const getFilteredNutritionList = nutritionList.reduce((items, item) => {
+      const { fdcId, name, value, unit } = item;
+      const itemIndex = items.findIndex(item => item.name === name && item.fdcId === fdcId);
+
+      /* add nutrition value to the list when there is no same item exist */
       if (itemIndex === -1) {
         items.push({
-          name, value, unit
+          fdcId, name, value, unit
         });
-      } else {
-        items[itemIndex].value = (items[itemIndex].value * 1 + value * 1).toFixed(2);
       }
 
       return items;
     }, []);
 
-    setCombinedNutritionList(getCombinedNutritionList);
+    setFilteredNutritionList(getFilteredNutritionList);
 
   }, [nutritionList]);
+
+
+  useEffect(() => {
+
+    /* use redce to combine nutrition values */
+    const getCombinedNutritionList = filteredNutritionList.reduce((items, item) => {
+      const { fdcId, name, value, unit } = item;
+      const itemIndex = items.findIndex(item => item.name === name);
+
+      /* add nutrition value to the list when there is no same item exist */
+      if (itemIndex === -1) {
+        items.push({
+          fdcId, name, value, unit
+        });
+      } else {
+        /* sum up nutrition value of other item  */
+        items[itemIndex].value = (items[itemIndex].value * 1 + value * 1).toFixed(2);
+      }
+      return items;
+    }, []);
+
+    setCombinedNutritionList(getCombinedNutritionList);
+
+  }, [filteredNutritionList]);
 
 
   useEffect(() => {
@@ -164,14 +191,14 @@ function IngredientsInfo({ data }) {
           <div className={resultStyle}>
             <h3><img src="/images/title-bg.png" alt="lemon" />Nutritions Per Serving</h3>
             {/* show nutritions per serving */}
-            {nutritionPerServing.length > 0 
-            && nutritionPerServing.filter(item => item.value > 0).map((i, id) => (
-              <div key={id} className='food-nutrition'>
-                <div><b>{i.name}</b></div>
-                <div>{i.value}</div>
-                <div>{i.unit}</div>
-              </div>
-            ))}
+            {nutritionPerServing.length > 0
+              && nutritionPerServing.filter(item => item.value > 0).map((i, id) => (
+                <div key={id} className='food-nutrition'>
+                  <div><b>{i.name}</b></div>
+                  <div>{i.value}</div>
+                  <div>{i.unit}</div>
+                </div>
+              ))}
           </div>
         </div>
       </div>
