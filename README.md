@@ -1,6 +1,7 @@
 # Healthy Cooking App
 - Calculate your food nutritions
 - React App Project
+- HTML, CSS, Javascript, and React
 - Support Mobile View
 - Save user's ingrdients in the localstorage
 -------
@@ -71,9 +72,9 @@
 ```
 
 
-## Unsolved Problem
+## Unsolved Problems
 - Add calculation for the oz unit
-- Check the 'Branded' food nutritions in deatail 
+- Check the 'Branded' food nutritions in detail and calculation
 
 
 ## Upgrade Version
