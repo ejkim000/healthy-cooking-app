@@ -72,7 +72,6 @@
 
 
 ## Unsolved Problem
-- When remove ingredient, the nutrition value stays
 - Add calculation for the oz unit
 - Check the 'Branded' food nutritions in deatail 
 

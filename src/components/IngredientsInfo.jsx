@@ -11,6 +11,7 @@ function IngredientsInfo({ data }) {
   const [perServing, setPerServing] = useState(1);
   const [resultStyle, setResultStyle] = useState('hidden');
 
+
   /* get all nutritions */
   const getTotalNutritions = () => {
 
@@ -34,7 +35,8 @@ function IngredientsInfo({ data }) {
             }
           }
 
-          /* add all the nutritions to the list : somehow, duplicated adding happens - needed to filter*/
+          /* add all the nutritions to the list : 
+          somehow, duplicated adding happens - added filter to fix this issue*/
           setNutritionList((prev) => {
             return [
               ...prev,
@@ -50,6 +52,7 @@ function IngredientsInfo({ data }) {
       });
     }
   }
+
 
   /* get nutritions per serving */
   const getNutritionPerServing = () => {
@@ -69,18 +72,27 @@ function IngredientsInfo({ data }) {
     ))
   }
 
+
+  /* update per serving data */
   const handleChange = (val) => {
     setPerServing(val * 1);
-    console.log(perServing);
   }
 
+
+  /* Get nutrition info per serving */
   const handleClick = () => {
     getNutritionPerServing();
   }
 
+
+  /* Remove selected food from list */
   const handleRemove = (foodId) => {
     setSelectedFoods((prev) => prev.filter((food) => food.fdcId !== foodId));
+
+    /* filter removed food from the nutrition list */
+    setNutritionList((prev) => prev.filter((item) => item.fdcId !== foodId));
   }
+
 
   useEffect(() => {
     /* add received data to the selectedFoods and local storage */
@@ -94,8 +106,10 @@ function IngredientsInfo({ data }) {
 
 
   useEffect(() => {
+    // console.log('selected food: ', selectedFoods);
     /* save slsectedFoods to the local storage */
     localStorage.setItem('allFoods', JSON.stringify(selectedFoods));
+
     /* get total nutritions of selectedFood */
     getTotalNutritions();
 
@@ -103,6 +117,8 @@ function IngredientsInfo({ data }) {
 
 
   useEffect(() => {
+
+    // console.log('before filter: ', nutritionList);
     /* use reduce to prevent duplicated nutrition items */
     const getFilteredNutritionList = nutritionList.reduce((items, item) => {
       const { fdcId, name, value, unit } = item;
@@ -114,7 +130,6 @@ function IngredientsInfo({ data }) {
           fdcId, name, value, unit
         });
       }
-
       return items;
     }, []);
 
@@ -125,6 +140,7 @@ function IngredientsInfo({ data }) {
 
   useEffect(() => {
 
+    // console.log('filtered: ', filteredNutritionList);
     /* use redce to combine nutrition values */
     const getCombinedNutritionList = filteredNutritionList.reduce((items, item) => {
       const { fdcId, name, value, unit } = item;
@@ -156,7 +172,7 @@ function IngredientsInfo({ data }) {
 
   useEffect(() => {
 
-    //console.log(combinedNutritionList);
+    // console.log('combined: ', combinedNutritionList);
 
   }, [combinedNutritionList]);
 
