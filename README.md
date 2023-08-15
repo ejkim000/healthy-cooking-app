@@ -17,6 +17,10 @@
 - https://fdc.nal.usda.gov/api-guide.html
 
 
+## Technologies Used
+- React, Javascript, HTML, CSS
+
+
 ## Approach Taken
 1. Project Setup
 - Set up your development environment by installing Node.js, npm, and VITE (Node Package Manager).
