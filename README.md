@@ -65,7 +65,7 @@
 - Make sure APIKEY stays in the .env file and set up this in the Netlify website
 
 
-## VITE
+## VITE Installation
 - Installatin & run
 ``` 
 > npm create vite@latest 
