@@ -96,8 +96,9 @@ function IngredientsInfo({ data }) {
 
   useEffect(() => {
     /* add received data to the selectedFoods and local storage */
+    // console.log (Object.keys(data))
     if (Object.keys(data).length > 0) {
-      selectedFoods.length > 0 ? setSelectedFoods(prev => [
+      (selectedFoods && selectedFoods.length > 0) ? setSelectedFoods(prev => [
         ...prev,
         data
       ]) : setSelectedFoods([data]);
@@ -224,7 +225,8 @@ function IngredientsInfo({ data }) {
 
   const loading = () => null;
 
-  return (selectedFoods
+  return (
+    selectedFoods
     && selectedFoods.length > 0
     && nutritionList.length > 0
     && combinedNutritionList.length > 0
